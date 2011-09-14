@@ -1,0 +1,33 @@
+{% extends "aresource_base.html" %}
+
+{% block content %}
+<h1>Resources for {{ tag }}</h1>
+
+ 
+<h3>Topic Resource</h3>
+   <ul>
+{% for tr in tr_list %}
+
+		<li>
+            <a href="{{ tr.resource.url }}">{{ tr.resource.url }}</a>
+            <p>Used in Topic: {{ tr.topic.title }}</p>
+            <p> {{ tr.note }}</p>
+        </li>
+
+{% endfor %}
+    </ul>
+
+
+<h3>Personal Resource</h3>    
+    <ul>
+{% for r in pr_list %}
+
+        <li>
+            <a href="{{ r.get_absolute_url }}">{{ r.title }}</a>
+            <p> {{ r.note }}</p>
+        </li>
+
+{% endfor %}
+    </ul>
+
+{% endblock %}

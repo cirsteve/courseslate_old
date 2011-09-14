@@ -1,0 +1,31 @@
+{% extends "people_base.html" %}
+{% load tagging_tags %}
+
+{% block content %}
+    <h2>{{ person.user }}</h2>
+    <p>Name: {{ person.user.get_full_name }}</p>
+    <p>Email: {{ person.user.email }}</p>
+    <p>Member Since: {{ person.user.date_joined }}</p>
+    <p>Location: {{ person.location }}</p>
+    <p>About {{ person.user }}: {{ person.bio }}</p>
+    <p>Website: <a href="{{ person.website }}">{{ person.website }}</a></p>
+    
+    <div class="content-list">
+    
+        <h3>Personal Resources</h3>
+
+         {% include "includes/pr_list_inc.html" %}
+
+    </div>
+
+    <hr />
+
+    <div class="content-list">
+
+        <h3>Study Topics</h3>
+
+        {% include "includes/topic_list_inc.html" %}
+
+    </div>
+   
+{% endblock %}

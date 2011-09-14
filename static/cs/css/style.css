@@ -1,0 +1,277 @@
+/* #617064 slate, #DCDCDC lgray, #F25251 red, #97C99E aqua, #E8D065 gold, #07041C dblue */
+
+div.container {
+    padding: 0 0 0 2px;
+}
+
+a {
+    color: #07041C;
+}
+
+a:hover {
+    color: #617064;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.nidden {
+    display: none;
+}
+
+#header {
+    background-color: #617064;
+    border-bottom: thick #07041;
+}
+
+#site-title h1{
+    margin-bottom: .1em;
+    color: #97C99E;
+}
+
+#slate {
+    color: #ffffff;
+}
+
+#header-nav li{
+    display:inline;
+    margin: 0 1em;
+}
+
+#header-nav ul {
+    margin: .2em .5em;
+}
+
+#header-nav a {
+     color: #E8D065;
+     font-size: 2em;
+     padding-right: 2px;
+}
+
+#header-nav a:hover {
+     color: #97C99E;
+}
+
+#sub-header {
+    background-color: #DCDCDC;
+    padding-top: 2px;
+}
+
+#sub-header p {
+    margin: 1px 4px;
+}
+
+#sub-header  {
+    font-size: 1.4em;
+}
+
+#sub-header form {
+    font-size: .7em;
+    font-weight: none;
+}
+
+#sidebar {
+   font-size: 1.1em; 
+}
+
+#main-nav {
+    font-size: 1.8em;
+}
+
+#main-nav a {
+    color: #97C99E
+}
+
+#main-nav a:hover {
+    background-color: #97C99E;
+    color: #ffffff;
+}
+
+#main-nav  ul {
+    margin: 0.5em 0.5em;
+}
+
+#main-nav li{
+    display:inline;
+    padding: .2em;
+}
+
+#sectionhead {
+    background-color: #617064;
+    margin: 0 10px 4px 0;
+}
+
+#sectionhead h2 {
+    color: #ffffff;
+    display: inline;
+}
+
+#sectionhead ul {
+    display: inline;
+}
+
+#sectionhead li {
+    display: inline;
+    font-size: 1.5em;
+    margin: 0 .5em;
+}
+
+#sectionhead a {
+    color: #ffffff;
+}
+
+#sectionhead a:hover {
+    color: #E8D065;
+}
+
+#content p {
+    font-size: 1em;
+    margin: 0 0 .5em;
+}
+
+#content h1 {
+    color: #07041C;
+    padding-top: .4em;
+    font-size: 2em;
+}
+
+#content h3 {
+    color: #617064;
+    padding-top: .2em;
+    font-size: 2em;
+}
+
+#topic-description {
+    font-size: 1.2em;
+    color: #617064;
+    padding: .2em .4em;
+}
+
+#content ul {
+    padding-left: .2em;
+}
+
+.tag-list {
+    font-size: 1.3em;
+}
+
+.tag-list ul {
+    list-style-type: none;
+    padding-left: .5em;
+    margin: 0em .5em .5em 0em;
+}
+
+ul.tags a {
+    color: #617064;
+    background-color: #E8D065;
+    padding: .1em .2em;
+}
+
+ul.tags a:hover {
+    color: #E8D065;
+    background-color: #617064;
+}
+
+.content-list {
+    font-size: 1.3em;
+}
+
+.content-list ul {
+    list-style-type: none;
+    padding-left: .5em;
+    margin: 0em .5em .5em 0em;
+}
+
+.content-list h5 {
+    color: #617064;
+    margin-bottom: .2em;
+    font-size:1.1em;
+}
+
+.content-list h5:hover {
+    color: #DCDCDC;
+}
+
+.content-list a {
+    color: #07041C;
+}
+
+a.tru {
+    color: #F25251;
+    font-size: .9em;
+}
+
+a.tru:visited {
+    color: #617064;
+}
+
+.content-list a:hover {
+    color: #E8D065;
+}
+
+.content-list li:nth-child(odd) {
+    background: #EEEEEE;
+}
+
+.content-list li:hover {
+    background: #97C99E;
+}
+
+/* Forms */
+
+
+
+form label {
+    color: #07041C;
+}
+
+#formt form {
+    width: 400px;
+    display: visible;
+}
+
+#formt label {
+    display: block;
+}
+
+#sub-header input[type="text"], input[type="password"] {
+    width: 130px;
+}
+
+form textarea {
+    height: 50px;
+    width: 400px;
+}
+
+form#tr-form textarea {
+    height: 50px;
+    width: 300px;
+}
+
+#content label {
+    display: block;
+    margin-bottom: 1px;
+}
+
+#content form {
+    border: 2px solid #617064;
+    margin: 2px 2px 4px 2px;
+    padding: 2px;
+    background-color: #DCDCDC;
+    width: 570px;
+}
+
+#content form p {
+    margin: 0 0 0.4em;
+}
+
+#content input[type="text"], input[type="password"], input.text, input.title, textarea, select {
+margin: 1px 0;
+}
+
+

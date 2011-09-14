@@ -1,0 +1,18 @@
+{% load markup %}
+
+<ul>
+            {% for t in topic_list %}
+                
+                <li>
+                <a href={{ t.get_absolute_url }}><h5>{{ t.title }}</h5></a>
+                 Created {{ t.created|date:"d/m/y-f a" }} Under <a href={{ t.category.get_absolute_url }}>{{ t.category }}</a>
+<span id="topic-person"> by <a href="{{ t.person.get_absolute_url }}">{{ t.person }}</a></span>
+                <p>{{ t.description }}</p>
+                </li>
+            
+            {% empty %}
+
+                <p>No topics</p>
+
+            {% endfor %}
+</ul>

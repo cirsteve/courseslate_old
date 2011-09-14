@@ -1,0 +1,15 @@
+{% extends "mystudy_base.html" %}
+
+{% block content %}
+<h2>Study Topic Categories</h2>
+
+{% for c in category_list %}
+
+<div class="content-list">
+    <ul>
+        <li><a href="{{ c.get_absolute_url }}">{{ c.name }} - {{ c.topic_set.count }} Topic{{ c.topic_set.count|pluralize }}</a></li>
+    </ul>
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load tagging_tags %}
+
+
+
+{% block sidebar %}
+	<p>Tags</p>
+	{% tag_cloud_for_model mystudy.Topic as tagc %}
+	{% for tag in tagc %}
+		{{ tag.name }}
+	{% endfor %}
+{% endblock %}
+
+{% block sectionhead %}
+
+	<h2>Study Topics</h2>
+
+	<ul>
+		<li><a href="/topics/">Topics</a></li>
+		<li><a href="/topics/category/">Categories</a></li>
+        <li><a href="/topics/tags/">Tags</a></li>
+	</ul>
+
+{% endblock %}

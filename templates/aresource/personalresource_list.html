@@ -1,0 +1,13 @@
+{% extends "aresource_base.html" %}
+{% load markup %}
+
+{% block content %}
+<h2>List of Resources for {{ person }}</h2>
+
+    <div class="content-list">
+
+        {% include "includes/pr_list_inc.html" %}
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% load markup %}
+
+<ul>
+    {% for u in pr_list %}
+  
+        <li>
+        <a href='{{ u.resource.url }}'>{{ u.resource.url }}</a>
+           <p>{{ u.title }} - Added {{ u.added }}</p>
+        <p>{{ u.note|markdown }}</p>
+        </li>
+
+    {% empty %}
+
+        <p>No resources at this time.</p>
+    
+    {% endfor %}
+
+
+
+</ul>

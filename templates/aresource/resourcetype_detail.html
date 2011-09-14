@@ -1,0 +1,15 @@
+{% extends "aresource_base.html" %}
+
+{% block content %}
+
+<div id="resource-title">
+	<h2>{{ resourcetype.name }}</h2>
+</div>
+    <p>{{ resourcetype.description }}</p>
+<h3>Current Resources</h3>
+<div id="resource-list">
+
+    {% include "includes/resources_list_inc.html" %}
+
+</div>
+{% endblock %}

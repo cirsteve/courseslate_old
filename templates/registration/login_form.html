@@ -1,0 +1,16 @@
+    <form action="/accounts/login/" method="post">{% csrf_token %}
+
+        <label for="username">Username:</label>
+        <input type="text" name="username" value"" id="username">
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" value="" id="password">
+        
+        <span class="form-widget">
+        
+        <input type="submit" value="Login" />
+        <a href="/accounts/password/reset/">Password Reset</a>
+        </span>
+
+        <input type="hidden" name="next" value="{{ next|escape }}" />
+    </form>

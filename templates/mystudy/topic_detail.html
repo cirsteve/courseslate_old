@@ -1,0 +1,130 @@
+{% extends "mystudy_base.html" %}
+{% load tagging_tags %}
+{% load markup %}
+
+{% block content %}
+
+	<h1>{{ topic.title }}</h1>
+    
+    {% if request.user == topic.person.user %}
+
+    <a href={% url topic_edit topic.slug %}>Edit Topic</a>
+
+    {% endif %}
+
+    <p>Status: {{ topic.get_status_display }} |Deadline: {{ topic.deadline }} - Changed:{{ topic.dmod_count }}</p>
+    <p>Filed Under
+ <a href={{ topic.category.get_absolute_url }}>{{ topic.category }}</a> on
+ {{ topic.created }}</p>
+	
+    <div id="topic-description">
+    
+    <p>{{ topic.description|markdown }}</p>
+
+    
+    {% tags_for_object topic as tags %}
+
+    <div class="content-list">
+
+
+        <ul class="tags">
+    Tags:
+        {% for tag in tags %}
+        
+            <a href={% url topic_tags_detail tag.name %}>{{ tag.name }}</a>
+
+        {% endfor %}
+        </ul>
+
+    </div>
+
+    </div>
+
+    <hr />
+
+	<h3>Updates - {{ update_list.count }}</h3>
+
+    <a href={% url topic_updates topic.slug %}>View Updates Only</a>
+
+    {% if request.user == topic.person.user %}<input class="nidden" type="button" id="update-trigger" value="Add Update" />
+
+        <form class="absolute" id="update-form" action="{% url topic_update_create topic.slug %}" method="POST">{% csrf_token %}
+
+            {{ update_form.as_p }}
+
+            <input type="submit" value="Submit" />
+            <input type="reset" value="Reset" />
+        
+        </form>
+
+    {% endif %}
+
+    <div class="content-list">
+
+    {% include "includes/update_list_inc.html" %}
+
+    </div>
+
+    <hr />
+
+	<h3>Topic Resources - {{ tr_list.count }}</h3>
+
+    <a href={% url topic_resources topic.slug %}>View Topic Resources Only</a>
+
+    {% if request.user == topic.person.user %}<input class="nidden" type="button" id="tr-trigger" value="Add Resource" />
+
+	    <form class="absolute" id="tr-form" action="{% url topic_resource_create topic.slug %}" method="POST">{% csrf_token %}
+    
+            {{ tr_form.as_p }}
+
+            <input type="submit" value="Submit" />
+            <input type="reset" value="Reset" />
+
+        </form>
+
+    {% endif %}
+
+    <div class="content-list">
+        {% include "includes/tr_list_inc.html" %}
+    </div>
+
+    <hr />
+
+
+{% endblock %}
+
+{% block footer-scripts %}
+
+<script type="text/javascript">
+
+jQuery('input[type="button"]').removeClass('nidden');
+
+jQuery('#content form').addClass('nidden');
+
+jQuery('#update-trigger').click(function() {
+    if (jQuery('#update-form').hasClass('nidden')) {
+        jQuery('#update-form').removeClass('nidden');
+        jQuery('input#update-trigger').attr("value", 'Cancel Update');
+    }
+    else {
+        jQuery('#update-form').addClass('nidden');
+        jQuery('#update-form')[0].reset();
+        jQuery('input#update-trigger').attr("value", 'Add Update');
+    }
+});
+
+jQuery('#tr-trigger').click(function() {
+    if (jQuery('#tr-form').hasClass('nidden')) {
+        jQuery('#tr-form').removeClass('nidden');
+        jQuery('input#tr-trigger').attr("value", 'Cancel Resource');
+    }
+    else {
+        jQuery('#tr-form').addClass('nidden');
+        jQuery('#tr-form')[0].reset();
+        jQuery('input#tr-trigger').attr("value", 'Add Resource');
+    }
+});
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "mystudy_base.html" %}
+{% load tagging_tags %}
+
+{% block content %}
+	<h2>Add a Study Topic Resource</h2>
+	<form action="" method="post">{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="Submit" />
+	</form>
+{% endblock %}

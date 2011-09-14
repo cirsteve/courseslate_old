@@ -1,0 +1,8 @@
+    <form action="/accounts/login/" method="post">{% csrf_token %}
+        <label for="username">Email:</label>
+        <input type="text" name="username" value"" id="username">
+        <label for="password">Password:</label>
+        <input type="password" name="password" value="" id="password">
+        <input type="submit" value="Login" />
+        <input type="hidden" name="next" value="{{ next|escape }}" />
+    </form>

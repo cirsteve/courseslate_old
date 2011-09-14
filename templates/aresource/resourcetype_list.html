@@ -1,0 +1,17 @@
+{% extends "aresource_base.html" %}
+
+{% block content %}
+<h3>Resource Types</h3>
+
+    <ul>
+{% for r in resourcetype_list %}
+
+		<li>
+            <a href="{{ r.get_absolute_url }}">{{ r.name }} - {{ r.resource_set.count }}</a>
+            <p> {{ r.description }}</p>
+        </li>
+
+{% endfor %}
+    </ul>
+
+{% endblock %}

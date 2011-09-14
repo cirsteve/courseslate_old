@@ -1,0 +1,4 @@
+You have signed up at TourGuideGigs but still need to activate your account within {{ expiration_days }} by clicking on the link below.
+If the link is not clickable please cut and paste into your browsers address bar.
+
+http://courseslate.com/accounts/activate/{{ activation_key }}

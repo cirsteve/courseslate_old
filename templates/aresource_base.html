@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block sectionhead %}
+
+	<h2>Resources</h2>
+
+
+
+	<ul>
+		<li><a href="{% url resource_list %}">Resources</a></li>
+        <li><a href="{% url resource_type_list %}">Resource Types</a></li>
+        <li><a href="{% url resource_tags_list %}">Tags</a></li>
+	</ul>
+
+{% endblock %}
+
+{% block sidebar %}
+	<p>This is the Sidebar</p>
+{% endblock %}

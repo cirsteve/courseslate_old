@@ -1,0 +1,29 @@
+{% extends "aresource_base.html" %}
+
+{% block content %}
+
+
+    <h2><a href="{{ resource.url }}">{{ resource.url }}</a></h2>
+
+Filed Under 
+<a href="{{ resource.rtype.get_absolute_url }}/">{{ resource.rtype }}</a> | Initially added {{ resource.added }}
+
+    <h4>Referenced in {{ tr_list.count }} topics</h4>
+
+    <div class="content-list">
+    
+        {% include "includes/tr_list_inc.html" %}
+
+    </div>
+
+    <hr />
+
+    <h4>Referenced in {{ pr_list.count }} profiles</h4>
+
+    <div class="content-list">
+
+        {% include "includes/pr_list_inc.html" %}
+
+    </div>
+
+{% endblock %}

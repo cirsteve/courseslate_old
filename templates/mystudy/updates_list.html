@@ -1,0 +1,18 @@
+{% extends "mystudy_base.html" %}
+{% load markup %}
+
+{% block title-tag %} {{ block.super }} {% endblock %}
+
+
+{% block content %}
+
+<h2>Updates for <a href={{ topic.get_absolute_url }}>{{ topic }}</a></h2>
+
+    <div class="content-list">
+    
+    {% include "includes/update_list_inc.html" %}
+
+    </div>
+
+{% endblock %}
+    

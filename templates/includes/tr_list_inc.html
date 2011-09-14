@@ -1,0 +1,25 @@
+{% load markup %}
+
+<ul>
+    {% for r in tr_list %}
+    
+        <li>
+        
+            <h5>{{ r.title }}</h5>Added {{ r.added }} | <a href={% url resource_type_list %}>{{ r.rtype }}</a>
+             {% if request.user == topic.person.user %}
+| <a href="{% url topic_resource_delete topic.slug r.id %}">Delete</a>
+ <a href="{% url topic_resource_edit topic.slug r.id %}">Edit</a>
+             {% endif %}
+            <p><a class="tru" href={{ r.resource.url }}>{{ r.resource.url }}</a></p>
+            <p>{{ r.note|markdown }}</p>
+        </li>
+
+    {% empty %}
+
+        <p>No resources added yet</p>
+
+    {% endfor %}
+</ul>
+
+
+

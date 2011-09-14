@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="{{ STATIC_URL }}css/blueprint/screen.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/blueprint/print.css" type="text/css" media="print" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css" type="text/css" media="screen" />
+  <!--[if lt IE 8]>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/blueprint/ie.css" type="text/css" media="screen, projection">
+  <![endif]-->
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
+    <title>{% block title-tag %}CourseSlate{% endblock %}</title>
+</head>
+
+<div class="container">
+<body>
+
+<div id="header" class="span-24">
+    <div id="site-title" class="span-8">
+	    <a href='/'><h1>Course<span id="slate">Slate</span></h1></a>
+    </div>
+
+    <div id="header-nav" class="right">
+
+    {% if request.user.is_authenticated %}
+
+        <ul>
+            <li>
+                <a href={% url topic_create %}>Add A Topic</a>
+            </li>
+
+            <li>
+                <a href={% url personalresource_create %}>Add a Resource</a>
+            </li>
+        </ul>
+
+    {% else %}
+
+            <a href="/accounts/register/">Sign Up as a for an Account</a>      
+
+    {% endif %}
+
+    </div>
+
+</div>
+
+
+<div id="sub-header" class="span-24">
+
+    <div class="span-16">
+    {% if request.user.is_authenticated %}
+            <a href="/people/{{ request.user }}/">{{ request.user }}</a>, <a href="/people/edit-profile/">Edit Your Profile</a>, <a href="/accounts/logout/">Logout</a>
+
+    {% else %}
+
+
+
+            {% include "registration/login_form.html" %}
+
+
+
+    {% endif %}
+
+    </div>
+
+    <div class="right">
+
+        <p><a href="/about/">About</a>
+        <a href="/contact/">Contact</a></p>
+    
+
+    </div>
+
+</div>
+
+
+    
+<div id="main-nav" class="span-15">
+<ul>
+	<li><a href="/resources/">Resources</a></li>
+	<li><a href="/topics/">Study Topics</a></li>
+    <li><a href="/people/">People</a></li>
+</ul>
+</div>
+
+<div id="sectionhead" class="span-15">
+	{% block sectionhead %}{% endblock %}
+</div>
+
+<div id="content" class="span-15">
+    {% block content %}{% endblock %}
+</div>
+
+
+
+<div id="sidebar" class="span-8 right">
+
+    <div class="box-sidebar">
+        {% if request.user.is_authenticated %}
+        {% load people_tags %}
+            <p>Add a <a href="{% url personalresource_create %}">Personal Resource</a> or <a href='{% url topic_create %}'>Topic</a></p>
+            <p>Top Priority: <a href='{{ request.user.get_profile.primary_topic.get_absolute_url }}'>{{ request.user.get_profile.primary_topic }}</a><p>
+
+            <p>Recently Viewed Topics</p>
+            {% recently_viewed_topics request.user.username %}
+            <ul>
+            {% for t in recently_viewed_t %}
+                <li>{{ t.title }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+
+            <p><a href="/accounts/register/">Sign Up as a for an Account</a></p>
+
+        {% endif %}
+    </div>
+
+	{% block sidebar %}{% endblock %}
+</div>
+    
+<div id="footer">
+    {% block footer %}
+    <hr>
+    <p>Copywrited Me</p>
+    {% endblock %}
+</div>
+
+    {% block footer-scripts %} {% endblock %}
+</body>
+</div>
+</html>

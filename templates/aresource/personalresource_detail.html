@@ -1,0 +1,16 @@
+{% extends "aresource_base.html" %}
+{% load markup %}
+
+{% block content %}
+
+<div id="resource-title">
+    <h2>Personal Resources for {{ user }}</h2>
+    <h3>{{ resource.title }}</h3>
+</div>
+Filed Under 
+<a href="{{ resource.rtype.get_absolute_url }}/">{{ resource.rtype }}</a> on {{ resource.added }}
+
+<div id="resource-link">
+    <a href="{{ resource.url }}">{{ resource.url }}</a>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+<ul>
+    {% for r in resource_list %}
+    
+        <li>
+            <h4><a href="{{ r.url }}">{{ r.url }}</a></h4>
+            <p><a href="{% url resource_detail r.id %}">Referenced in {{ r.personalresource_set.count }} profiles and {{ r.topicresource_set.all.count }} topics</a></p>
+        </li>
+
+    {% empty %}
+
+        <p>No resources</p>
+
+    {% endfor %}
+</ul>

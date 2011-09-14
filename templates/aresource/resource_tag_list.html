@@ -1,0 +1,19 @@
+{% extends "aresource_base.html" %}
+
+{% block content %}
+<h3>Browse Resource by Tag</h3>
+
+    <ul>
+{% for r in tag_list %}
+
+        <li>
+            <a href="{% url resource_tags_detail name=r.name %}">{{ r.name }}</a>
+
+        </li>
+
+{% endfor %}
+    </ul>
+    
+ 
+
+{% endblock %}
