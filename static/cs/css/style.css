@@ -212,7 +212,7 @@ ul.tags a:hover {
 }
 
 .content-list a > h5:hover {
-    color: #DCDCDC;
+    color: #97C99E;
 }
 
 .content-list a {
@@ -230,7 +230,7 @@ a.tru:visited {
 }
 
 .content-list a:hover {
-    color: #E8D065;
+    color: #97C99E;
 }
 
 .content-list li:nth-child(odd) {

@@ -4,23 +4,27 @@
 
 {% block content %}
 
-	<h1>{{ topic.title }}</h1>
+	<h2>{{ topic.title }}</h2>
     
-    {% if request.user == topic.person.user %}
-
-    <a href={% url topic_edit topic.slug %}>Edit Topic</a>
-
-    {% endif %}
-
-    <p>Status: {{ topic.get_status_display }} |Deadline: {{ topic.deadline }} - Changed:{{ topic.dmod_count }}</p>
-    <p>Filed Under
- <a href={{ topic.category.get_absolute_url }}>{{ topic.category }}</a> on
- {{ topic.created }}</p>
+    
 	
     <div id="topic-description">
     
-    <p>{{ topic.description|markdown }}</p>
+    {{ topic.description|markdown }}
 
+    </div>
+
+{% if request.user == topic.person.user %}
+
+    <p>Status: {{ topic.get_status_display }} | Deadline: {{ topic.deadline|date }} - Changed:{{ topic.dmod_count }}
+ <a href={% url topic_edit topic.slug %}>Edit Topic</a></p>
+
+    {% endif %}
+
+<p> Filed Under
+ <a href={{ topic.category.get_absolute_url }}>{{ topic.category }}</a> on
+ {{ topic.created|date:"d/m/y P" }}
+     </p>
     
     {% tags_for_object topic as tags %}
 
@@ -38,9 +42,10 @@
 
     </div>
 
-    </div>
 
     <hr />
+
+    <div class="content-list">
 
 	<h3>Updates - {{ update_list.count }}</h3>
 
@@ -59,13 +64,15 @@
 
     {% endif %}
 
-    <div class="content-list">
+    
 
     {% include "includes/update_list_inc.html" %}
 
     </div>
 
     <hr />
+
+    <div class="content-list">
 
 	<h3>Topic Resources - {{ tr_list.count }}</h3>
 
@@ -84,7 +91,7 @@
 
     {% endif %}
 
-    <div class="content-list">
+    
         {% include "includes/tr_list_inc.html" %}
     </div>
 
@@ -94,18 +101,12 @@
 {% endblock %}
 
 {% block footer-scripts %}
-
+<script type="text/javascript" src="{{ STATIC_URL }}js/ocl.js"></script>
 <script type="text/javascript">
 
 jQuery('input[type="button"]').removeClass('nidden');
 
 jQuery('#content form').addClass('nidden');
-
-jQuery('.oc').addClass('nidden');
-
-jQuery('ul.ocl li').click(function() {
-    jQuery(this).children('span.oc').toggleClass('nidden');
-});
 
 jQuery('#update-trigger').click(function() {
     if (jQuery('#update-form').hasClass('nidden')) {

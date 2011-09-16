@@ -25,13 +25,13 @@ class UserTopicListView(ListView):
     
     def get_queryset(self):
         self.person = get_object_or_404(Person, user__username__iexact=self.kwargs['person'])
-        return Topic.objects.filter(person=self.person)
+        return Topic.objects.filter(person=self.person).order_by('-last_viewed')
         
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super(UserTopicListView, self).get_context_data(**kwargs)
         # Add in the publisher
-        context['person'] = Person.objects.get(user__username__iexact=self.kwargs['person'])
+        context['person'] = self.person
         return context
 
 

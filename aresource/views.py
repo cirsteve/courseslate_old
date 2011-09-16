@@ -28,9 +28,9 @@ class ResourceDetailView(DetailView):
 
 
 class ResourceTypeListView(ListView):
-	context_object_name = 'resourcetype_list'
-	model = ResourceType
-	template_name = 'aresource/resourcetype_list.html'
+    context_object_name = 'resourcetype_list'
+    model = ResourceType
+    template_name = 'aresource/resourcetype_list.html'
 
 
 class ResourceTypeDetailView(DetailView):
@@ -45,8 +45,8 @@ class ResourceTypeDetailView(DetailView):
 
 
 class ResourceTypeCreateView(CreateView):
-	model = ResourceType
-	template_name = 'aresource/resourcetype_create.html'
+    model = ResourceType
+    template_name = 'aresource/resourcetype_create.html'
 
 
 class ResourceCreateView(CreateView):
@@ -72,7 +72,6 @@ class PersonalResourceCreateView(CreateView):
     context_object_name = 'resource'
     template_name = 'aresource/personalresource_create.html'
     form_class = PersonalResourceForm
-    success_url = '../..'
     
     def form_valid(self, form):
         try:
@@ -112,7 +111,7 @@ class PersonalResourceListView(ListView):
     
     def get_queryset(self, **kwargs):
         self.person = get_object_or_404(Person, user__username__iexact=self.kwargs['person'])
-        return PersonalResource.objects.filter(person=self.person)
+        return PersonalResource.objects.filter(person=self.person).order_by('-added')
     
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
