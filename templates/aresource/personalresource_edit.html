@@ -1,0 +1,12 @@
+{% extends "aresource_base.html" %}
+{% load tagging_tags %}
+
+{% block content %}
+	<h2>Edit Your Personal Resource</h2>
+	<form action="" method="post">{% csrf_token %}
+
+		{{ form.as_p }}
+
+		<input type="submit" value="Submit" />
+	</form>
+{% endblock %}

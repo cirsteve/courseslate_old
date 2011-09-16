@@ -109,6 +109,14 @@ class TopicResourceEditView(UpdateView):
     form_class = TopicResourceForm
     template_name = 'mystudy/topicresources_edit.html'
     success_url = '../../..'
+    
+    def get_initial(self):
+        initial = super(TopicResourceEditView, self).get_initial()
+        #TODO: proper auto-generation of code
+        res = TopicResource.objects.get(id=self.object.id)
+        r = res.resource.url
+        initial.update({'resource': str(r)})
+        return initial
 
 
 class TopicResourcesListView(ListView):
@@ -181,11 +189,16 @@ class UpdateDeleteView(DeleteView):
     
 
 class CategoryDetailView(DetailView):
-	context_object_name = 'category'
-	queryset = Category.objects.all()
-	template_name = 'mystudy/category_detail.html'
-	
-	
+    context_object_name = 'category'
+    queryset = Category.objects.all()
+    template_name = 'mystudy/category_detail.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(CategoryDetailView, self).get_context_data(**kwargs)
+        context['topic_list'] = self.object.topic_set.all()
+        return context
+
+
 class CategoryListView(ListView):
 	context_object_name = 'category_list'
 	queryset = Category.objects.all()

@@ -1,13 +1,15 @@
 {% load markup %}
 
+<div class="content-list topic-list">
+
 <ul>
             {% for t in topic_list %}
                 
                 <li>
                 <a href={{ t.get_absolute_url }}><h5>{{ t.title }}</h5></a>
-                 Created {{ t.created|date:"d/m/y-f a" }} Under <a href={{ t.category.get_absolute_url }}>{{ t.category }}</a>
-<span id="topic-person"> by <a href="{{ t.person.get_absolute_url }}">{{ t.person }}</a></span>
-                <p>{{ t.description }}</p>
+                 <span class="ns"><p>Added {{ t.created|date:"d/m/y-f a" }} in <a href={{ t.category.get_absolute_url }}>{{ t.category }}</a>
+<span id="pinfo"> by <a href="{{ t.person.get_absolute_url }}">{{ t.person }}</a></span></p>
+                {{ t.description|markdown }}</span>
                 </li>
             
             {% empty %}
@@ -16,3 +18,5 @@
 
             {% endfor %}
 </ul>
+
+</div>

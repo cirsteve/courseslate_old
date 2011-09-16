@@ -4,11 +4,18 @@
 
 
 {% block sidebar %}
-	<p>Tags</p>
+
+<div class="side-head">
+	<a href="{% url topic_tags_list %}"><h3>Topics Tags</h3></a>
+
+</div>
 	{% tag_cloud_for_model mystudy.Topic as tagc %}
+    <ul class="tag-list tags">
 	{% for tag in tagc %}
-		{{ tag.name }}
+		<a href="{% url topic_tags_detail tag.name %}">{{ tag.name }}</a>
 	{% endfor %}
+    </ul>
+
 {% endblock %}
 
 {% block sectionhead %}
@@ -18,7 +25,7 @@
 	<ul>
 		<li><a href="/topics/">Topics</a></li>
 		<li><a href="/topics/category/">Categories</a></li>
-        <li><a href="/topics/tags/">Tags</a></li>
+        <li><a href="/topics/tags-cs/">Tags</a></li>
 	</ul>
 
 {% endblock %}

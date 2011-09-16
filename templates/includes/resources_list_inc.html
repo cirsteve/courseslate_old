@@ -1,8 +1,11 @@
+{% load people_tags %}
+
+<div class="content-list resource-list">
 <ul>
     {% for r in resource_list %}
     
         <li>
-            <h4><a href="{{ r.url }}">{{ r.url }}</a></h4>
+            <a class="tru" href="{{ r.url }}">{{ r.url|sliceit:70 }}</a>
             <p><a href="{% url resource_detail r.id %}">Referenced in {{ r.personalresource_set.count }} profiles and {{ r.topicresource_set.all.count }} topics</a></p>
         </li>
 
@@ -12,3 +15,5 @@
 
     {% endfor %}
 </ul>
+
+</div>

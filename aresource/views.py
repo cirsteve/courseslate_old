@@ -1,6 +1,6 @@
 # Create your views here.
 from django.shortcuts import render_to_response, get_object_or_404
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.http import HttpResponseRedirect
 from aresource.models import Resource, ResourceType, PersonalResource
 from aresource.forms import ResourceForm, PersonalResourceForm
@@ -34,9 +34,14 @@ class ResourceTypeListView(ListView):
 
 
 class ResourceTypeDetailView(DetailView):
-	context_object_name = 'resourcetype'
-	model = ResourceType
-	template_name = 'aresource/resourcetype_detail.html'
+    context_object_name = 'resourcetype'
+    model = ResourceType
+    template_name = 'aresource/resourcetype_detail.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(ResourceTypeDetailView, self).get_context_data(**kwargs)
+        context['resource_list'] = self.object.resource_set.all()
+        return context
 
 
 class ResourceTypeCreateView(CreateView):
@@ -82,6 +87,22 @@ class PersonalResourceCreateView(CreateView):
         self.object.resource = r
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
+        
+
+class PersonalResourceEditView(UpdateView):
+    context_object_name = 'resource'
+    template_name = 'aresource/personalresource_edit.html'
+    form_class = PersonalResourceForm
+    model = PersonalResource
+        
+        
+    def get_initial(self):
+        initial = super(PersonalResourceEditView, self).get_initial()
+        #TODO: proper auto-generation of code
+        res = PersonalResource.objects.get(id=self.object.id)
+        r = res.resource.url
+        initial.update({'resource': str(r)})
+        return initial
         
         
 class PersonalResourceListView(ListView):

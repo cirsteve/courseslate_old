@@ -1,15 +1,18 @@
 {% load markup %}
 
-<ul>
+<div class="content-list update-list">
+
+<ul class="ocl">
     {% for u in update_list %}
     
         <li>
-             <h5>{{ u.title }}</h5> Added {{ u.added|date:"d/m/y f a" }}
+             <h5>{{ u.title }}</h5>
+            <p>Added {{ u.added|date:"d/m/y f a" }}
              {% if request.user == topic.person.user %}
 | <a href="{% url topic_update_delete topic.slug u.id %}">Delete</a>
  <a href="{% url topic_update_edit topic.slug u.id %}">Edit</a>
-             {% endif %}
-             <p>{{ u.comment|markdown }}</p>
+             {% endif %}</p>
+             <span class="oc">{{ u.comment|markdown }}</span>
         </li>
 
 
@@ -19,3 +22,5 @@
     
     {% endfor %}
 </ul>
+
+</div>

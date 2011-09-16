@@ -14,7 +14,6 @@ urlpatterns = patterns('',
     url(r'^register/$', register,
         {'backend': 'registration.backends.default.DefaultBackend',
         'form_class': TermsAndUniqueRegForm,
-        'template_name': 'myreg/tosregistration_form.html',
-        'success_url': '/'},
+        'template_name': 'myreg/tosregistration_form.html'},
         name='registration_register'),
         )

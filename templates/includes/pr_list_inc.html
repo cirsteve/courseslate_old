@@ -1,12 +1,17 @@
 {% load markup %}
 
+<div class="content-list pr-list">
+
 <ul>
+
     {% for u in pr_list %}
   
         <li>
-        <a href='{{ u.resource.url }}'>{{ u.resource.url }}</a>
-           <p>{{ u.title }} - Added {{ u.added }}</p>
-        <p>{{ u.note|markdown }}</p>
+        
+        <a href={% url personalresource_detail u.person u.id %}><h5>{{ u.title }}</h5></a>
+        <span class="ns"><p>Added {{ u.added }} by {{ u.person }}</p>
+        <a class="tru" href='{{ u.resource.url }}'>{{ u.resource.url }}</a>
+        {{ u.note|markdown }}</span>
         </li>
 
     {% empty %}
@@ -18,3 +23,5 @@
 
 
 </ul>
+
+</div>

@@ -76,7 +76,24 @@ a:hover {
 }
 
 #sidebar {
-   font-size: 1.1em; 
+   font-size: 1.1em;
+}
+
+#sidebar .ns {
+    display: none;
+}
+
+.side-head {
+    background-color: #617064;
+    text-align: center;
+}
+
+.side-head h3 {
+    color: #ffffff;
+}
+
+.side-head h3:hover {
+    color: #E8D065;
 }
 
 #main-nav {
@@ -130,8 +147,8 @@ a:hover {
 }
 
 #content p {
-    font-size: 1em;
-    margin: 0 0 .5em;
+    font-size: 1.1em;
+    margin: 0 0 .1em;
 }
 
 #content h1 {
@@ -178,7 +195,7 @@ ul.tags a:hover {
 }
 
 .content-list {
-    font-size: 1.3em;
+    font-size: 1.1em;
 }
 
 .content-list ul {
@@ -188,12 +205,13 @@ ul.tags a:hover {
 }
 
 .content-list h5 {
-    color: #617064;
+    color: #07041C;
     margin-bottom: .2em;
-    font-size:1.1em;
+    display: inline;
+    font-weight: bold;
 }
 
-.content-list h5:hover {
+.content-list a > h5:hover {
     color: #DCDCDC;
 }
 
@@ -204,6 +222,7 @@ ul.tags a:hover {
 a.tru {
     color: #F25251;
     font-size: .9em;
+    font-weight: bold;
 }
 
 a.tru:visited {
@@ -216,10 +235,16 @@ a.tru:visited {
 
 .content-list li:nth-child(odd) {
     background: #EEEEEE;
+    border: 2px dashed #EEEEEE;
+}
+
+.content-list li:nth-child(even) {
+    background: #ffffff;
+    border: 2px dashed #ffffff;
 }
 
 .content-list li:hover {
-    background: #97C99E;
+    border: 2px dashed #97C99E;
 }
 
 /* Forms */
@@ -228,6 +253,10 @@ a.tru:visited {
 
 form label {
     color: #07041C;
+}
+
+form input#id_tag {
+    width: 300px;
 }
 
 #formt form {

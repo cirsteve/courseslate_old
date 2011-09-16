@@ -101,6 +101,12 @@ jQuery('input[type="button"]').removeClass('nidden');
 
 jQuery('#content form').addClass('nidden');
 
+jQuery('.oc').addClass('nidden');
+
+jQuery('ul.ocl li').click(function() {
+    jQuery(this).children('span.oc').toggleClass('nidden');
+});
+
 jQuery('#update-trigger').click(function() {
     if (jQuery('#update-form').hasClass('nidden')) {
         jQuery('#update-form').removeClass('nidden');

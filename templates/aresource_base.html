@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load tagging_tags %}
 
 {% block sectionhead %}
 
@@ -15,5 +16,15 @@
 {% endblock %}
 
 {% block sidebar %}
-	<p>This is the Sidebar</p>
+<div class="side-head">
+    <a href={% url resource_tags_list %}><h3>Resource Tags</h3></a>
+
+</div>
+    {% tag_cloud_for_model aresource.PersonalResource as tagc %}
+    <ul class="tags tag-list">
+    {% for tag in tagc %}
+        <a href="{% url resource_tags_detail tag.name %}">{{ tag.name }}</a>
+    {% endfor %}
+    </ul>
+
 {% endblock %}

@@ -1,16 +1,42 @@
 {% extends "aresource_base.html" %}
+{% load tagging_tags %}
 {% load markup %}
+{% load people_tags %}
 
 {% block content %}
-
+<div class="content-list">
 <div id="resource-title">
-    <h2>Personal Resources for {{ user }}</h2>
-    <h3>{{ resource.title }}</h3>
+    <h5>Personal Resource for {{ user }}</h5>
+    <h1>{{ resource.title }}</h1>
 </div>
 Filed Under 
 <a href="{{ resource.rtype.get_absolute_url }}/">{{ resource.rtype }}</a> on {{ resource.added }}
 
+        {% if request.user == resource.person.user %}
+
+            <a href="{% url personalresource_edit resource.id %}">Edit</a>
+
+        {% endif %}
+
 <div id="resource-link">
-    <a href="{{ resource.url }}">{{ resource.url }}</a>
+    <a class="tru" href="{{ resource.resource.url }}">{{ resource.resource.url|sliceit:70 }}</a>
+</div>
+
+<p>{{ resource.note|markdown }}</p>
+
+<div class="content-list">
+
+    {% tags_for_object resource as tags %}
+
+        <ul class="tags">
+    Tags:
+        {% for tag in tags %}
+        
+            <a href={% url topic_tags_detail tag.name %}>{{ tag.name }}</a>
+
+        {% endfor %}
+        </ul>
+
+    </div>
 </div>
 {% endblock %}

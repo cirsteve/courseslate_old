@@ -2,12 +2,14 @@
 {% load tagging_tags %}
 
 {% block content %}
+
+
 <h2>{{ category.name }}</h2>
-{% for t in category.topic_set.all %}
-<ul>
-	<li>{{ t.title }}</li>
-</ul>
-{% endfor %}
+
+
+    {% include "includes/topic_list_inc.html" %}
+
+
 
 
 
