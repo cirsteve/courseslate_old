@@ -6,6 +6,9 @@ from mystudy.views import TopicResourcesCreateView, TopicResourcesListView, Topi
 from mystudy.views import UpdatesListView, UpdatesCreateView, UpdateEditView, UpdateDeleteView
 from mystudy.views import CategoryCreateView, CategoryDetailView, CategoryListView
 from mystudy.views import TopicTagsListView, TopicTagsDetailView
+from mystudy.models import Topic, Update, TopicResource
+
+from people.decorators import owner_required
 
 urlpatterns = patterns('',
     url(r'category/$', CategoryListView.as_view(), name='topic_category_list'),
@@ -18,11 +21,11 @@ urlpatterns = patterns('',
     url(r'(?P<topic>[-\w]+)/updates/$', UpdatesListView.as_view(), name='topic_updates'),
     url(r'(?P<slug>[-\w]+)/updates/add/$', login_required(UpdatesCreateView.as_view()), name='topic_update_create'),
     url(r'(?P<slug>[-\w]+)/topic-resource/add/$', login_required(TopicResourcesCreateView.as_view()), name='topic_resource_create'),
-    url(r'(?P<slug>[-\w]+)/updates/edit/(?P<pk>\d+)/$', login_required(UpdateEditView.as_view()), name='topic_update_edit'),
-    url(r'(?P<slug>[-\w]+)/topic-resource/edit/(?P<pk>\d+)/$', login_required(TopicResourceEditView.as_view()), name='topic_resource_edit'),
-    url(r'(?P<slug>[-\w]+)/updates/delete/(?P<pk>\d+)/$', login_required(UpdateDeleteView.as_view()), name='topic_update_delete'),
-    url(r'(?P<slug>[-\w]+)/topic-resource/delete/(?P<pk>\d+)/$', login_required(TopicResourceDeleteView.as_view()), name='topic_resource_delete'),    
-    url(r'(?P<slug>[-\w]+)/edit/$', TopicEditView.as_view(), name='topic_edit'),    
+    url(r'(?P<slug>[-\w]+)/updates/edit/(?P<pk>\d+)/$', owner_required(UpdateEditView.as_view(), Update), name='topic_update_edit'),
+    url(r'(?P<slug>[-\w]+)/topic-resource/edit/(?P<pk>\d+)/$', owner_required(TopicResourceEditView.as_view(), TopicResource), name='topic_resource_edit'),
+    url(r'(?P<slug>[-\w]+)/updates/delete/(?P<pk>\d+)/$', owner_required(UpdateDeleteView.as_view(), Update), name='topic_update_delete'),
+    url(r'(?P<slug>[-\w]+)/topic-resource/delete/(?P<pk>\d+)/$', owner_required(TopicResourceDeleteView.as_view(), TopicResource), name='topic_resource_delete'),    
+    url(r'(?P<slug>[-\w]+)/edit/$', owner_required(TopicEditView.as_view(), Topic), name='topic_edit'),    
     url(r'(?P<slug>[-\w]+)/$', TopicDetailView.as_view(), name='topic_detail'),
     url(r'^$', TopicListView.as_view(), name='topic_list'),
 )

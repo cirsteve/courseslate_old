@@ -23,7 +23,7 @@ class UpdatesForm(ModelForm):
 
 
 class TopicResourceForm(ModelForm):
-    resource = URLField(label='Resource URL', widget=TextInput(attrs={'size':'70'}))
+    resource = URLField(label='Resource URL')
     class Meta:
         model = TopicResource
         fields = ('title', 'rtype', 'note')

@@ -4,6 +4,8 @@ from django.template.defaultfilters import slugify
 from treebeard.mp_tree import MP_Node
 from tagging.fields import TagField
 
+from aresource.models import Resource
+
 #from people.models import Person
 import tagging
 # Create your models here.
@@ -83,7 +85,7 @@ class TopicResource(models.Model):
     updated = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=140, blank=True)
     note = models.TextField(blank=True)
-    resource = models.ForeignKey('aresource.Resource')
+    resource = models.ForeignKey(Resource)
     rtype = models.ForeignKey('aresource.ResourceType', verbose_name="Resource Type", blank=True, null=True)
     topic = models.ForeignKey('mystudy.Topic')
 
