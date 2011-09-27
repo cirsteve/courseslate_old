@@ -61,7 +61,7 @@ class Topic(models.Model):
         super(Topic, self).save(*args,**kwargs)
     
     def get_absolute_url(self):
-        return '/topics/%s' % self.slug
+        return '/topics/user/%s/%s' % (self.person.user.username, self.slug)
         
     class Meta:
         unique_together = (("person", "title"),("person", "slug"))
@@ -69,16 +69,17 @@ class Topic(models.Model):
 
 class Update(models.Model):
     title = models.CharField(max_length=200)
-    comment = models.TextField()
+    comment = models.TextField(blank=True)
     topic = models.ForeignKey(Topic)
     added = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    #eureka = models.BooleanField()
         
     def __unicode__(self):
         return '%s' % self.pk
         
     def get_absolute_url(self):
-        return '/topics/update/%s' % self.pk
+        return '/topics/users/%s/%s/updates/%d' % (self.topic.person.user, self.topic.slug, self.pk)
 
 class TopicResource(models.Model):
     added = models.DateTimeField(auto_now_add=True)
@@ -88,6 +89,7 @@ class TopicResource(models.Model):
     resource = models.ForeignKey(Resource)
     rtype = models.ForeignKey('aresource.ResourceType', verbose_name="Resource Type", blank=True, null=True)
     topic = models.ForeignKey('mystudy.Topic')
+    #eureka = models.BooleanField()
 
     def __unicode__(self):
         return '%s on %s' % (self.resource, self.topic)

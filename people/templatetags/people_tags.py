@@ -15,6 +15,19 @@ def person_topics(user):
 def person_resources(user):
     t = PersonalResource.objects.filter(person__user__username__iexact=user).order_by('-added')[:4]
     return {"pr_list": t}
+    
+    
+@register.inclusion_tag('includes/topic_list_inc.html')    
+def all_topics():
+    t = Topic.objects.all().order_by('-created')[:4]
+    return {"topic_list": t}
+    
+    
+@register.inclusion_tag('includes/pr_list_inc.html')    
+def all_resources():
+    t = PersonalResource.objects.all().order_by('-added')[:4]
+    return {"pr_list": t}
+    
 
 @register.filter
 def sliceit(string, length):

@@ -14,6 +14,9 @@ from django.db.models.query import QuerySet
 from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import slugify
 
+import urllib2
+import simplejson
+
 from tagging import settings
 from tagging.utils import calculate_cloud, get_tag_list, get_queryset_and_model, parse_tag_input
 from tagging.utils import LOGARITHMIC
@@ -459,6 +462,7 @@ class Tag(models.Model):
     A tag.
     """
     name = models.CharField(_('name'), max_length=50, unique=True, db_index=True)
+#    wiki_info = models.TextField(blank=True)
     objects = TagManager()
 
     class Meta:

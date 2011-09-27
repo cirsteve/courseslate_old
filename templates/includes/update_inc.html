@@ -1,0 +1,17 @@
+{% load markup %}
+
+
+
+    
+        <li>
+             <h5>{{ u.title }}</h5>
+            <p>Added {{ u.added|date:"d/m/y f a" }}
+             {% if request.user == topic.person.user %}
+| <a href="#">Delete</a>
+ <a href="#">Edit</a>
+             {% endif %}</p>
+             <div class="oc">{{ u.comment|markdown }}</div>
+        </li>
+
+
+

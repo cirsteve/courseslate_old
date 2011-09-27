@@ -17,7 +17,7 @@
 {% if request.user == topic.person.user %}
 
     <p>Status: {{ topic.get_status_display }} | Deadline: {{ topic.deadline|date }} - Changed:{{ topic.dmod_count }}
- <a href={% url topic_edit topic.slug %}>Edit Topic</a></p>
+ <a href={% url topic_edit topic.person.user topic.slug %}>Edit Topic</a></p>
 
     {% endif %}
 
@@ -49,16 +49,19 @@
 
 	<h3>Updates - {{ update_list.count }}</h3>
 
-    <a href={% url topic_updates topic.slug %}>View Updates Only</a>
+    <a href={% url topic_updates topic.person.user topic.slug %}>View Updates Only</a>
 
     {% if request.user == topic.person.user %}<input class="nidden" type="button" id="update-trigger" value="Add Update" />
 
-        <form class="absolute" id="update-form" action="{% url topic_update_create topic.slug %}" method="POST">{% csrf_token %}
+        <form class="absolute" id="update-form" action="{% url topic_update_create topic.person.user topic.slug %}" method="POST">{% csrf_token %}
 
+        <div id="update-wrapper">
             {{ update_form.as_p }}
 
-            <input type="submit" value="Submit" />
+            <input id="update-submit" type="submit" value="Submit" />
             <input type="reset" value="Reset" />
+
+        </div>
         
         </form>
 
@@ -76,17 +79,17 @@
 
 	<h3>Topic Resources - {{ tr_list.count }}</h3>
 
-    <a href={% url topic_resources topic.slug %}>View Topic Resources Only</a>
+    <a href={% url topic_resources topic.person.user topic.slug %}>View Topic Resources Only</a>
 
     {% if request.user == topic.person.user %}<input class="nidden" type="button" id="tr-trigger" value="Add Resource" />
 
-	    <form class="absolute" id="tr-form" action="{% url topic_resource_create topic.slug %}" method="POST">{% csrf_token %}
-    
+	    <form class="absolute" id="tr-form" action="{% url topic_resource_create topic.person.user topic.slug %}" method="POST">{% csrf_token %}
+        <div id="tr-wrapper">
             {{ tr_form.as_p }}
 
-            <input type="submit" value="Submit" />
+            <input id="tr-submit" type="submit" value="Submit" />
             <input type="reset" value="Reset" />
-
+        </div>
         </form>
 
     {% endif %}
@@ -132,6 +135,50 @@ jQuery('#tr-trigger').click(function() {
     }
 });
 
+function addUpdate(e) {
+    e.preventDefault();
+    var form = jQuery(e.target);
+    jQuery.ajax({
+        url: form.attr('action'),
+        type: form.attr('method'),
+        data: form.serialize(),
+        dataType: 'json',
+        success: function(data, responseStatus, jqXHR){
+            var r = data;
+            $("div.update-list ul.ocl").prepend(r.html);
+            $('#update-form')[0].reset();
+            $('input#update-trigger').attr("value", 'Add Update');
+            $('#update-form').addClass('nidden');
+        }
+    });
+};
+
+jQuery("form#update-form").submit(function(e){
+    addUpdate(e);
+});
+
+
+function addTR(e) {
+    e.preventDefault();
+    var form = jQuery(e.target);
+    jQuery.ajax({
+        url: form.attr('action'),
+        type: form.attr('method'),
+        data: form.serialize(),
+        dataType: 'json',
+        success: function(data, responseStatus, jqXHR){
+            var r = data;
+            $("div.tr-list ul.ocl").prepend(r.html);
+            $('#tr-form')[0].reset();
+            $('input#tr-trigger').attr("value", 'Add Update');
+            $('#tr-form').addClass('nidden');
+        }
+    });
+};
+
+jQuery("form#tr-form").submit(function(e){
+    addTR(e);
+});
 </script>
 
 {% endblock %}

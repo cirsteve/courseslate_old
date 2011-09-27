@@ -1,0 +1,21 @@
+{% load markup %}
+{% load people_tags %}
+
+
+
+        <li>
+        
+            <h5>{{ r.title }}</h5>
+            <p><a class="tru" href={{ r.resource.url }}>{{ r.resource.url|sliceit:70 }}</a></p>
+            <span class="oc"><p>Added {{ r.added }}{% if r.rtype %} |<a href={% url resource_type_detail r.rtype.slug %}>{{ r.rtype }}</a>{% endif %}
+             
+| <a href="/topics/user/{{ r.topic.person.user }}/{{ r.topic.slug }}/topic-resource/delete/{{ r.id }}/">Delete</a>
+ <a href="/topics/user/{{ r.topic.person.user }}/{{ r.topic.slug }}/topic-resource/edit/{{ r.id }}/">Edit</a>
+         
+            {{ r.note|markdown }}</span>
+        </li>
+
+
+
+
+

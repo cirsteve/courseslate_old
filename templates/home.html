@@ -1,0 +1,28 @@
+{% extends "mystudy_base.html" %}
+
+{% block content %}
+
+<h1>Welcome to CourseSlate</h1>
+
+<div class="content-list">
+
+
+
+<a href="topics/"><h3>Recent Topics</h3></a>
+
+{% include "includes/topic_list_inc.html" %}
+
+<hr />
+
+<a href="resources/"><h3>Recent Resources</h3></a>
+
+{% include "includes/resources_list_inc.html" %}
+
+<hr />
+
+<a href="people/"><h3>Recently Joined</h3></a>
+
+{% include "includes/people_list_inc.html" %}
+
+</div>
+{% endblock %}

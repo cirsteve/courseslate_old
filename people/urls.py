@@ -8,7 +8,7 @@ from aresource.views import PersonalResourceCreateView, PersonalResourceEditView
 from aresource.models import PersonalResource
 
 urlpatterns = patterns('',
-    url(r'user-resources/edit/(?P<pk>[-\d]+)/$', owner_required(PersonalResourceEditView.as_view(), PersonalResource), name='personalresource_edit'),
+    url(r'user-resources/edit/(?P<pk>[-\d]+)/$', PersonalResourceEditView.as_view(), name='personalresource_edit'),
     url(r'user-resources/add/$', login_required(PersonalResourceCreateView.as_view()), name='personalresource_create'),
     url(r'user-resources/(?P<person>[-\w]+)/$', PersonalResourceListView.as_view(), name='personalresource_list'),
     url(r'user-resources/(?P<person>[-\w]+)/(?P<pk>\d+)/$', PersonalResourceDetailView.as_view(), name='personalresource_detail'),
