@@ -51,7 +51,7 @@
 
     <a href={% url topic_updates topic.person.user topic.slug %}>View Updates Only</a>
 
-    {% if request.user == topic.person.user %}<input class="nidden" type="button" id="update-trigger" value="Add Update" />
+    {% if request.user == topic.person.user %}<input class="hide" type="button" id="update-trigger" value="Add Update" />
 
         <form class="absolute" id="update-form" action="{% url topic_update_create topic.person.user topic.slug %}" method="POST">{% csrf_token %}
 
@@ -81,7 +81,7 @@
 
     <a href={% url topic_resources topic.person.user topic.slug %}>View Topic Resources Only</a>
 
-    {% if request.user == topic.person.user %}<input class="nidden" type="button" id="tr-trigger" value="Add Resource" />
+    {% if request.user == topic.person.user %}<input class="hide" type="button" id="tr-trigger" value="Add Resource" />
 
 	    <form class="absolute" id="tr-form" action="{% url topic_resource_create topic.person.user topic.slug %}" method="POST">{% csrf_token %}
         <div id="tr-wrapper">
@@ -107,29 +107,29 @@
 <script type="text/javascript" src="{{ STATIC_URL }}js/ocl.js"></script>
 <script type="text/javascript">
 
-jQuery('input[type="button"]').removeClass('nidden');
+jQuery('input[type="button"]').removeClass('hide');
 
-jQuery('#content form').addClass('nidden');
+jQuery('#content form').addClass('hide');
 
 jQuery('#update-trigger').click(function() {
-    if (jQuery('#update-form').hasClass('nidden')) {
-        jQuery('#update-form').removeClass('nidden');
+    if (jQuery('#update-form').hasClass('hide')) {
+        jQuery('#update-form').removeClass('hide');
         jQuery('input#update-trigger').attr("value", 'Cancel Update');
     }
     else {
-        jQuery('#update-form').addClass('nidden');
+        jQuery('#update-form').addClass('hide');
         jQuery('#update-form')[0].reset();
         jQuery('input#update-trigger').attr("value", 'Add Update');
     }
 });
 
 jQuery('#tr-trigger').click(function() {
-    if (jQuery('#tr-form').hasClass('nidden')) {
-        jQuery('#tr-form').removeClass('nidden');
+    if (jQuery('#tr-form').hasClass('hide')) {
+        jQuery('#tr-form').removeClass('hide');
         jQuery('input#tr-trigger').attr("value", 'Cancel Resource');
     }
     else {
-        jQuery('#tr-form').addClass('nidden');
+        jQuery('#tr-form').addClass('hide');
         jQuery('#tr-form')[0].reset();
         jQuery('input#tr-trigger').attr("value", 'Add Resource');
     }
@@ -148,7 +148,7 @@ function addUpdate(e) {
             $("div.update-list ul.ocl").prepend(r.html);
             $('#update-form')[0].reset();
             $('input#update-trigger').attr("value", 'Add Update');
-            $('#update-form').addClass('nidden');
+            $('#update-form').addClass('hide');
         }
     });
 };
@@ -171,7 +171,7 @@ function addTR(e) {
             $("div.tr-list ul.ocl").prepend(r.html);
             $('#tr-form')[0].reset();
             $('input#tr-trigger').attr("value", 'Add Update');
-            $('#tr-form').addClass('nidden');
+            $('#tr-form').addClass('hide');
         }
     });
 };
