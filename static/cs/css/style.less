@@ -1,0 +1,119 @@
+/* #617064 slate, #DCDCDC lgray, #F25251 red, #97C99E aqua, #E8D065 gold, #07041C dblue */
+
+@slate: #617064;
+@light-gray: #DCDCDC;
+@red: #F25251;
+@aqua: #97C99E;
+@gold: #E8D065;
+@dark-blue: #07041C;
+
+@ldark-blue: lighten(@dark-blue, 30%);
+
+.right {
+    float: right;
+}
+
+div.container {
+    background-color: #fff;
+}
+
+.content-list {
+  ul {list-style-type: none;
+      padding-left: .5em;
+      margin: 0em .5em .5em 0em;}
+  h5 {color: @dark-blue;
+      margin-bottom: .2em;
+      display: inline;
+      font-weight: bold;}
+  a > h5:hover {color: @aqua;}
+  a {color: @dark-blue;}
+  a:hover {color: @aqua;}
+  li:nth-child(odd) {background: #EEEEEE;}
+}
+
+a.tru {
+    color: #F25251;
+    font-size: .9em;
+    font-weight: bold;
+}
+
+a.tru:visited {
+    color: #617064;
+}
+
+
+
+#header {
+  background-color: @slate;
+    h1 {
+      font-size: 30px;
+      font-weight: bold;
+      color: @aqua;
+      display: inline;
+      span { color: #ffffff; }
+    }
+    h1:hover { text-decoration: underline;}
+    span { padding-top: 5px;}
+    a { color: @gold;
+        font-size: 26px;
+        text-decoration: none;
+        margin:10px;
+        padding-top: 5px;
+      &:hover { border-width: 1px;
+                color: #ffffff;
+        }
+    }
+}
+
+#sub-header {
+  background-color: @light-gray;
+  font-size: 1.4em;
+  height: 30px;
+  label,input { float:left;
+          width: auto;
+          display: inline;
+}
+  span { font-size: .8em;
+         padding: 0px;
+         margin: 0px;
+         height: auto;
+}
+  a { color: @dark-blue;}
+  a:hover {color: @ldark-blue;} 
+    
+}
+
+#main-nav {
+  font-size: 1.6em;
+  ul { margin: 10px;}
+  li {display: inline;
+      margin: 2px 5px;
+}
+  a { color: @aqua;}
+  a:hover {background-color: @aqua;
+           color: #ffffff;
+}
+    
+}
+
+
+#sectionhead {
+  font-size: 1.4em;
+  background-color: @slate;
+  h2 {display: inline;
+      color: @aqua;
+}
+  ul {display: inline;} 
+  li {display: inline;
+      margin: 5px;
+      a { color: @gold;}
+      a:hover { color: #ffffff;}
+}   
+}
+
+#content {
+  h1 { color: @dark-blue;}
+  h2 { color: @slate;}
+  h3 { color: @aqua;}
+
+}

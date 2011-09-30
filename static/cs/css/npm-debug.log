@@ -1,0 +1,109 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'less', '-g' ]
+info using npm@1.0.30
+info using node@v0.5.8-pre
+verbose config file /home/steve/.npmrc
+verbose config file /usr/local/etc/npmrc
+verbose into /usr/local/lib [ 'less' ]
+verbose cache add less
+verbose cache add [ 'less', null ]
+silly cache add: name, spec, args [ undefined, 'less', [ 'less', null ] ]
+verbose parsed url { pathname: 'less', href: 'less' }
+info addNamed [ 'less', '' ]
+verbose addNamed [ null, '' ]
+verbose GET less
+verbose raw, before any munging less
+verbose url resolving [ 'https://registry.npmjs.org/', './less' ]
+verbose url resolved https://registry.npmjs.org/less
+verbose etag "21HGPF92VK8Z441N5G5PVVUJM"
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.1.0 (Erlang OTP/R14B03)',
+silly get cb     etag: '"21HGPF92VK8Z441N5G5PVVUJM"',
+silly get cb     date: 'Fri, 30 Sep 2011 08:59:03 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag less from cache
+verbose GET less/1.1.4
+verbose raw, before any munging less/1.1.4
+verbose url resolving [ 'https://registry.npmjs.org/', './less/1.1.4' ]
+verbose url resolved https://registry.npmjs.org/less/1.1.4
+verbose etag "21HGPF92VK8Z441N5G5PVVUJM"
+silly get cb [ 304,
+silly get cb   { server: 'CouchDB/1.1.0 (Erlang OTP/R14B03)',
+silly get cb     etag: '"21HGPF92VK8Z441N5G5PVVUJM"',
+silly get cb     date: 'Fri, 30 Sep 2011 08:59:05 GMT',
+silly get cb     'content-length': '0' } ]
+verbose etag less/1.1.4 from cache
+verbose bin dist [ null,
+verbose bin dist   { shasum: 'cbc5714f77ff209d89db569cb01dc4b7266de135',
+verbose bin dist     tarball: 'http://registry.npmjs.org/less/-/less-1.1.4.tgz' } ]
+silly testEngine { name: 'less',
+silly testEngine   description: 'Leaner CSS',
+silly testEngine   url: 'http://lesscss.org',
+silly testEngine   keywords: [ 'css', 'parser', 'lesscss', 'browser' ],
+silly testEngine   author: { name: 'Alexis Sellier', email: 'self@cloudhead.net' },
+silly testEngine   contributors: [],
+silly testEngine   version: '1.1.4',
+silly testEngine   bin: { lessc: './bin/lessc' },
+silly testEngine   main: './lib/less/index',
+silly testEngine   directories: { test: './test' },
+silly testEngine   engines: { node: '>=0.4.0' },
+silly testEngine   _npmJsonOpts: 
+silly testEngine    { file: '/home/steve/.npm/less/1.1.4/package/package.json',
+silly testEngine      wscript: false,
+silly testEngine      contributors: false,
+silly testEngine      serverjs: false },
+silly testEngine   _id: 'less@1.1.4',
+silly testEngine   dependencies: {},
+silly testEngine   devDependencies: {},
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.30',
+silly testEngine   _nodeVersion: 'v0.5.8-pre',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/steve/.npm/less/1.1.4/package/package.json
+verbose loadDefaults less@1.1.4
+silly resolved [ { name: 'less',
+silly resolved     description: 'Leaner CSS',
+silly resolved     url: 'http://lesscss.org',
+silly resolved     keywords: [ 'css', 'parser', 'lesscss', 'browser' ],
+silly resolved     author: { name: 'Alexis Sellier', email: 'self@cloudhead.net' },
+silly resolved     contributors: [],
+silly resolved     version: '1.1.4',
+silly resolved     bin: { lessc: './bin/lessc' },
+silly resolved     main: './lib/less/index',
+silly resolved     directories: { test: './test' },
+silly resolved     engines: { node: '>=0.4.0' },
+silly resolved     _npmJsonOpts: 
+silly resolved      { file: '/home/steve/.npm/less/1.1.4/package/package.json',
+silly resolved        wscript: false,
+silly resolved        contributors: false,
+silly resolved        serverjs: false },
+silly resolved     _id: 'less@1.1.4',
+silly resolved     dependencies: {},
+silly resolved     devDependencies: {},
+silly resolved     _engineSupported: true,
+silly resolved     _npmVersion: '1.0.30',
+silly resolved     _nodeVersion: 'v0.5.8-pre',
+silly resolved     _defaultsLoaded: true } ]
+info into /usr/local/lib less@1.1.4
+info installOne less@1.1.4
+info unbuild /usr/local/lib/node_modules/less
+verbose from cache /home/steve/.npm/less/1.1.4/package/package.json
+verbose mkdir (expected) error ENOENT, Success '/usr/local/lib/node_modules/___less.npm'
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget /usr/local/lib/node_modules/less
+ERR! Could not create /usr/local/lib/node_modules/___less.npm
+ERR! error installing less@1.1.4 Error: EACCESS, Success '/usr/local/lib/node_modules/___less.npm'
+info unbuild /usr/local/lib/node_modules/less
+verbose installOne cb less@1.1.4
+ERR! Error: EACCESS, Success '/usr/local/lib/node_modules/___less.npm'
+ERR! Report this *entire* log at:
+ERR!     <http://github.com/isaacs/npm/issues>
+ERR! or email it to:
+ERR!     <npm-@googlegroups.com>
+ERR! 
+ERR! System Linux 2.6.35-30-generic
+ERR! command "node" "/usr/local/bin/npm" "install" "less" "-g"
+ERR! cwd /home/steve/mycode/courseslate/static/cs/css
+ERR! node -v v0.5.8-pre
+ERR! npm -v 1.0.30
+verbose exit [ 1, true ]
