@@ -7,14 +7,51 @@
 @gold: #E8D065;
 @dark-blue: #07041C;
 
+@gray: darken(@light-gray, 20%);
 @ldark-blue: lighten(@dark-blue, 30%);
-
-.right {
-    float: right;
+@des-slate: desaturate(@slate, 70%);
+@fade-aqua: fadeout(@aqua, 70%);
+@fade-slate: fadeout(@slate, 30%);
+.box-shadow (@x, @y, @blur, @alpha) {
+  @value: @x @y @blur rgba(0, 0, 0, @alpha);
+  box-shadow:         @value;
+  -moz-box-shadow:    @value;
+  -webkit-box-shadow: @value;
+}
+.border-radius (@radius) {
+  border-radius: @radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
 }
 
-div.container {
-    background-color: #fff;
+.border-radius (@radius, bottom) {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  -moz-border-top-right-radius: 0;
+  -moz-border-top-left-radius: 0;
+  -webkit-border-top-left-radius: 0;
+  -webkit-border-top-right-radius: 0;
+}
+.border-radius (@radius, right) {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  -moz-border-bottom-left-radius: 0;
+  -moz-border-top-left-radius: 0;
+  -webkit-border-bottom-left-radius: 0;
+  -webkit-border-top-left-radius: 0;
+}
+.box-shadow-inset (@x, @y, @blur, @color) {
+  box-shadow: @x @y @blur @color inset;
+  -moz-box-shadow: @x @y @blur @color inset;
+  -webkit-box-shadow: @x @y @blur @color inset;
+}
+
+.list-alt {
+      li:nth-child(odd) {background: #EEEEEE;}
+}
+
+.absolute {
+    position:absolute;
 }
 
 .content-list {
@@ -28,7 +65,6 @@ div.container {
   a > h5:hover {color: @aqua;}
   a {color: @dark-blue;}
   a:hover {color: @aqua;}
-  li:nth-child(odd) {background: #EEEEEE;}
 }
 
 .ocl {
@@ -38,7 +74,29 @@ div.container {
     
 } 
 
+.tag-list {
+    ul {
+    list-style-type: none;
+    padding: .5em;
+    margin: .0em .5em .5em 0em;
+}
 
+   li {
+    margin: .2em .3em .1em .2em;
+    display: inline;
+   }
+   
+   a {
+    color: #617064;
+    background-color: #E8D065;
+    font-size: 1.2em;
+}
+   a:hover {
+    color: #E8D065;
+    background-color: #617064;
+}   
+    
+}
 
 a.tru {
     color: #F25251;
@@ -50,10 +108,17 @@ a.tru:visited {
     color: #617064;
 }
 
-
-
-#header {
-  background-color: @slate;
+.header {
+  height: 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  overflow: visible;
+}
+.header-inner {
+  background-color: @fade-slate;
     h1 {
       font-size: 30px;
       font-weight: bold;
@@ -68,16 +133,21 @@ a.tru:visited {
         text-decoration: none;
         margin:10px;
         padding-top: 5px;
+        text-shadow: 0 -1px 0 rgba(0, .75, 2, 3);
       &:hover { border-width: 1px;
                 color: #ffffff;
         }
     }
 }
 
-#sub-header {
+.subheader-inner {
   background-color: @light-gray;
   font-size: 1.4em;
   height: 30px;
+  padding: 40px 5px 0px 5px;
+  .border-radius(7px);
+  form {display:inline;
+}
   label,input { float:left;
           width: auto;
           display: inline;
@@ -92,11 +162,11 @@ a.tru:visited {
     
 }
 
-#main-nav {
+.main-nav {
   font-size: 1.6em;
   ul { margin: 10px;}
   li {display: inline;
-      margin: 2px 5px;
+      margin: 2px 10px;
 }
   a { color: @aqua;}
   a:hover {background-color: @aqua;
@@ -105,24 +175,77 @@ a.tru:visited {
     
 }
 
+.sidebar{
+    background-color: @light-gray;
+    .side-head{ background-color: @slate;
+                height: 50%;
+                margin-bottom: 10px;
+    }
+    li span.ns {display:none;}
+    h3 { color: @aqua;
+             text-align: center;
+             font-size: 1.2em;
+             height: 30px;
+             clear: both;
+             position: relative;
+             line-height: 30px;
+    }
+    h3:hover {color: @gold;
+    }
+}
 
-#sectionhead {
+.sectionhead {
   font-size: 1.4em;
   background-color: @slate;
+  margin-left: 240px;
+  padding-left: 5px;
   h2 {display: inline;
       color: @aqua;
 }
   ul {display: inline;} 
   li {display: inline;
-      margin: 5px;
+      margin: 10px;
       a { color: @gold;}
       a:hover { color: #ffffff;}
 }   
 }
 
-#content {
-  h1 { color: @dark-blue;}
+
+.half-left{float: left;
+             width: 50%;
+      form {
+        background-color: @gray;
+        width: 335px;
+        padding: 5px;
+       label{display:block;
+             width: 200px;
+             text-align: left;
+    }
+       input[type="text"] {width:300px;}
+       label[for="id_eureka"] {width: auto;}
+       textarea { width: 100%; margin: 0; padding: 0; border-width: 0; }
+    }
+}
+             
+.half-right{float: right;
+          .half-left;
+}
+             
+.content {
+  h1 { color: @dark-blue;
+      padding-top: 10px;
+}
   h2 { color: @slate;}
   h3 { color: @aqua;}
+  li {.border-radius(10px);}
 
 }
+
+.content-list {
+    .list-alt;
+}
+
+.sidebar {
+  li {overflow: hidden;}
+}
+

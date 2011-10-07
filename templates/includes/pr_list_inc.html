@@ -8,9 +8,15 @@
   
         <li>
         
-        <a href={% url personalresource_detail u.person u.id %}><h5>{{ u.title }}</h5></a>
-        <span class="ns"><p>Added {{ u.added }} by {{ u.person }}</p>
+        <a href={% url personalresource_detail u.person u.id %}>
+{% if 0 == u.title|length %}
+<h5>{{ u.person }} Resource</h5></a>
+{% else %}
+<h5>{{ u.title }}</h5></a>
+{% endif %}
         <a class="tru" href='{{ u.resource.url }}'>{{ u.resource.url }}</a>
+        <span class="ns"><p>Added {{ u.added }} by {{ u.person }}</p>
+
         {{ u.note|markdown }}</span>
         </li>
 

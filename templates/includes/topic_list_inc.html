@@ -7,9 +7,10 @@
                 
                 <li>
                 <a href={{ t.get_absolute_url }}><h5>{{ t.title }}</h5></a>
-                 <span class="ns"><p>Added {{ t.created|date:"d/m/y-f a" }} in <a href={{ t.category.get_absolute_url }}>{{ t.category }}</a>
+                 <span class="ns">{{ t.description|markdown }}
+<p>Added {{ t.created|date:"d/m/y-f a" }} in <a href={{ t.category.get_absolute_url }}>{{ t.category }}</a>
 <span id="pinfo"> by <a href="{{ t.person.get_absolute_url }}">{{ t.person }}</a></span></p>
-                {{ t.description|markdown }}</span>
+                </span>
                 </li>
             
             {% empty %}
