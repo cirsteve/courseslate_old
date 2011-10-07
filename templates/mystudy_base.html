@@ -5,16 +5,18 @@
 
 {% block sidebar %}
 
-<div class="side-head">
+<div class="wrap">
+    <div class="side-head">
 	
-    <a href="{% url topic_tags_list %}"><h3>Topics Tags</h3></a>
+        <a href="{% url topic_tags_list %}"><h3>Topics Tags</h3></a>
 
+    </div>
 </div>
 
 	{% tag_cloud_for_model mystudy.Topic as tagc %}
     <ul class="tag-list tags">
 	{% for tag in tagc %}
-		<a href="{% url topic_tags_detail tag.name %}">{{ tag.name }}</a>
+		<li><a href="{% url topic_tags_detail tag.name %}">{{ tag.name }}</a></li>
 	{% endfor %}
     </ul>
 

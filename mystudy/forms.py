@@ -19,11 +19,11 @@ class CategoryForm(MoveNodeForm):
 class UpdatesForm(ModelForm):
     class Meta:
         model = Update
-        fields = ('title', 'comment')
+        fields = ('title', 'eureka','comment')
 
 
 class TopicResourceForm(ModelForm):
     resource = URLField(label='Resource URL')
     class Meta:
         model = TopicResource
-        fields = ('title', 'rtype', 'note')
+        fields = ('title','eureka', 'rtype', 'note')

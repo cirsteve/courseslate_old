@@ -17,15 +17,16 @@
 
 </head>
 
-<div class="container">
 <body>
 
-<div id="header" class="span16">
+<div class="header">
+  <div class="header-inner">
+    <div class="container-fluid">
     
 	    <a href='/'><h1>Course<span>Slate</span></h1></a>
    
 
-    <span class="right">
+    <span class="pull-right">
 
     {% if request.user.is_authenticated %}
 
@@ -42,13 +43,15 @@
     {% endif %}
 
     </span>
-
+    </div>
+  </div>
 </div>
 
+<div class="container-fluid">
+  <div class="subheader">
+    <div class="subheader-inner">
 
-<div id="sub-header" class="span16">
-
-    <div class="span11">
+    
     {% if request.user.is_authenticated %}
             <a href="/people/{{ request.user }}/">{{ request.user }}</a>, <a href="/people/edit-profile/">Edit Your Profile</a>, <a href="/accounts/logout/">Logout</a>
 
@@ -62,40 +65,29 @@
 
     {% endif %}
 
-    </div>
+    
 
-    <div class="right">
+    <span class="pull-right">
 
         <a href="/about/">About</a> |
         <a href="/contact/">Contact</a>
     
 
+    </span>
+
     </div>
+  </div>
+   
+  <div class="main-nav">
+    <ul>
+      <li><a href="/resources/">Resources</a></li>
+      <li><a href="/topics/">Study Topics</a></li>
+      <li><a href="/people/">People</a></li>
+    </ul>
+  </div>
 
-</div>
-
-
-    
-<div id="main-nav" class="span11">
-<ul>
-    <li><a href="/resources/">Resources</a></li>
-    <li><a href="/topics/">Study Topics</a></li>
-    <li><a href="/people/">People</a></li>
-</ul>
-</div>
-
-<div id="sectionhead" class="span11">
-	{% block sectionhead %}{% endblock %}
-</div>
-
-<div id="content" class="span11">
-    {% block content %}{% endblock %}
-</div>
-
-
-
-<div id="sidebar" class="span4 pull-right">
-{% load people_tags %}
+  <div class="sidebar">
+  {% load people_tags %}
 
         
     {% if request.user.is_authenticated %}
@@ -103,19 +95,25 @@
 
 
     <div class="side-head">
-    <a href="{% url user_topic_list request.user %}"><h3>Recently Viewed Topics</h3></a>
+
+        <a href="{% url user_topic_list request.user %}"><h3>Recently Viewed Topics</h3></a>
+
     </div>
+
             {% person_topics request.user.username %}
 
     
 
     <div class="side-head">
 
-    <a href="{% url personalresource_list request.user %}"><h3>Your Resources</h3></a></a>
+        <a href="{% url personalresource_list request.user %}"><h3>Your Resources</h3></a><select></select>
  
     </div>
+
             <div class="content-list">
-            {% person_resources request.user.username %}
+
+                {% person_resources request.user.username %}
+
             </div>
     
 
@@ -124,7 +122,7 @@
            <a href="/accounts/register/"><h3>Sign Up as a for an Account</h3></a>
 
 
-
+    
     <div class="side-head">
     <a href="{% url topic_list %}"><h3>Recent Topics</h3></a>
     </div>
@@ -134,11 +132,13 @@
 
     <div class="side-head">
 
-    <a href="{% url resource_list %}"><h3>Recent Resources</h3></a>
+        <a href="{% url resource_list %}"><h3>Recent Resources</h3></a>
  
     </div>
             <div class="content-list">
-            {% all_resources %}
+
+                {% all_resources %}
+
             </div>
     
 
@@ -146,15 +146,31 @@
         {% endif %}
     
 
-	{% block sidebar %}{% endblock %}
-</div>
+    {% block sidebar %}{% endblock %}
+  </div>
+
+  <div class="sectionhead">
+	  
+        {% block sectionhead %}{% endblock %}
+
+  </div>
+
+  <div class="content">
+
+      {% block content %}{% endblock %}
+
+  </div>
+
+
     
-<div id="footer" class="span16">
+  <div class="footer">
     {% block footer %}
     <hr>
     {% endblock %}
-</div>
+  </div>
     {% block footer-scripts %} {% endblock %}
+
+  </div>
+
 </body>
-</div>
 </html>

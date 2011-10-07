@@ -73,7 +73,7 @@ class Update(models.Model):
     topic = models.ForeignKey(Topic)
     added = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    #eureka = models.BooleanField()
+    eureka = models.BooleanField()
         
     def __unicode__(self):
         return '%s' % self.pk
@@ -89,7 +89,7 @@ class TopicResource(models.Model):
     resource = models.ForeignKey(Resource)
     rtype = models.ForeignKey('aresource.ResourceType', verbose_name="Resource Type", blank=True, null=True)
     topic = models.ForeignKey('mystudy.Topic')
-    #eureka = models.BooleanField()
+    eureka = models.BooleanField()
 
     def __unicode__(self):
         return '%s on %s' % (self.resource, self.topic)
