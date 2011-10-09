@@ -86,6 +86,13 @@ class PersonalResourceCreateView(CreateView):
         self.object.resource = r
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
+                
+    def get_initial(self):
+        initial = super(PersonalResourceCreateView, self).get_initial()
+        #TODO: proper auto-generation of code
+        res = self.request.GET.get('url','')        
+        initial.update({'resource': str(res)})
+        return initial
         
 
 class PersonalResourceEditView(UpdateView):
