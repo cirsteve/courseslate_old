@@ -1,22 +1,38 @@
 {% load markup %}
 {% load people_tags %}
 
-<div class="content-list tr-list">
-<ul class="ocl">
+
+<ul class="ocl tr-list">
     {% for r in tr_list %}
     
         <li>
         
             <h5>{{ r.title }}</h5>
-            <p><a class="tru" href={{ r.resource.url }}>{{ r.resource.url|sliceit:70 }}</a></p>
-            <span class="oc">
-            {{ r.note|markdown }}
-            <p>Added {{ r.added }}{% if r.rtype %} |<a href={% url resource_type_detail r.rtype.slug %}>{{ r.rtype }}</a>{% endif %}
-             {% if request.user == topic.person.user %}
-| <a href="{% url topic_resource_delete topic.person.user topic.slug r.id %}">Delete</a>
- <a href="{% url topic_resource_edit topic.person.user topic.slug r.id %}">Edit</a>
-             {% endif %}</p>
-</span>
+
+            {% if r.eureka %}
+                
+            <b>!!!<span>Eureka! It's all coming together</span></b>
+
+            {% endif %}
+
+            <p>
+                <a class="tru" href={{ r.resource.url }}>{{ r.resource.url|sliceit:70 }}</a>
+            </p>
+            <div class="oc">
+            
+                {{ r.note|markdown }}
+
+                <p>Added <span class="created">{{ r.added }}</span>{% if r.rtype %} |<a href={% url resource_type_detail r.rtype.slug %}>{{ r.rtype }}</a>{% endif %}
+
+                {% if request.user == topic.person.user %}
+
+                | <a href="{% url topic_resource_delete topic.person.user topic.slug r.id %}">Delete</a>
+                <a href="{% url topic_resource_edit topic.person.user topic.slug r.id %}">Edit</a>
+
+                {% endif %}</p>
+
+            </div>
+
         </li>
 
     {% empty %}
@@ -26,7 +42,6 @@
     {% endfor %}
 </ul>
 
-</div>
 
 
 

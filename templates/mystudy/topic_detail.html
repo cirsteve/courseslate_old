@@ -45,62 +45,96 @@
 
     <hr />
 
-    <div class="content-list half-left">
+    <div class="content-list pull-left half">
 
-	<h3>Updates - {{ update_list.count }}</h3>
+            <h3>Updates - {{ update_list.count }}</h3>
 
-    <a href={% url topic_updates topic.person.user topic.slug %}>View Updates Only</a>
+            {% if request.user == topic.person.user %}
+            
+            <input class="hide" type="button" id="update-trigger" value="Add Update" />
 
-    {% if request.user == topic.person.user %}<input class="hide" type="button" id="update-trigger" value="Add Update" />
-
-        <form class="absolute" id="update-form" action="{% url topic_update_create topic.person.user topic.slug %}" method="POST">{% csrf_token %}
-
-        <div id="update-wrapper">
-            {{ update_form.as_p }}
+            <form class="absolute" id="update-form" action="{% url topic_update_create topic.person.user topic.slug %}" method="POST">{% csrf_token %}
+                <div id="update-wrapper">
+            
+                        {{ update_form.as_p }}
 
 
-            <input id="update-submit" type="submit" value="Submit" />
-            <input type="reset" value="Reset" />
+                        <input id="update-submit" type="submit" value="Submit" />
 
-        </div>
+                        <input type="reset" value="Reset" />
+
+                </div>
         
-        </form>
+            </form>
+    
 
-    {% endif %}
+            {% endif %}
+
+            <br />
+
+            
+            <span class="view-input">
+                <input type="checkbox" class="hide" value="Updates Only" />
+                <a href={% url topic_updates topic.person.user topic.slug %}>Updates Only</a>
+            </span>
+            <input class="hide expand-trigger" type="button" value="Expand All" />
+            <select class="list-sort">
+                <option value="def" default>Order By...</option>
+                <option value="Newest" >Newest</option>
+                <option value="Oldest">Oldest</option>
+                <option value="AZ">A to Z</option>
+                <option value="ZA">Z to A</option>
+            </select>
 
     
 
-    {% include "includes/update_list_inc.html" %}
+            {% include "includes/update_list_inc.html" %}
 
     </div>
 
 
 
-    <div class="content-list half-right">
+    <div class="content-list pull-right half">
 
 
-	<h3>Topic Resources - {{ tr_list.count }}</h3>
+        <h3>Topic Resources - {{ tr_list.count }}</h3>
 
- 
-    <a href={% url topic_resources topic.person.user topic.slug %}>View Topic Resources Only</a>
+            {% if request.user == topic.person.user %}
 
-    {% if request.user == topic.person.user %}<input class="hide" type="button" id="tr-trigger" value="Add Resource" />
+            <input class="hide" type="button" id="tr-trigger" value="Add Resource" />
   
-	    <form class="absolute" id="tr-form" action="{% url topic_resource_create topic.person.user topic.slug %}" method="POST">{% csrf_token %}
-        <div id="tr-wrapper">
-            {{ tr_form.as_p }}
+            <form class="absolute" id="tr-form" action="{% url topic_resource_create topic.person.user topic.slug %}" method="POST">{% csrf_token %}
+                <div id="tr-wrapper">
 
-            <input id="tr-submit" type="submit" value="Submit" />
-            <input type="reset" value="Reset" />
+                    {{ tr_form.as_p }}
+
+                    <input id="tr-submit" type="submit" value="Submit" />
+                    <input type="reset" value="Reset" />
 
 
-        </div>
-        </form>
+                </div>
+            </form>
 
-    {% endif %}
+            {% endif %}
 
+            <br />
+ 
+            <span class="view-input">
+                <input type="checkbox" class="hide" value="Resources Only" />
+                <a href={% url topic_resources topic.person.user topic.slug %}>Resources Only</a>
+            </span>
+            <input class="hide expand-trigger" type="button" value="Expand All" />
+            <select class="list-sort">
+                <option value="def" default>Order By...</option>
+                <option value="Newest" >Newest</option>
+                <option value="Oldest">Oldest</option>
+                <option value="AZ">A to Z</option>
+                <option value="ZA">Z to A</option>
+            </select>
     
-        {% include "includes/tr_list_inc.html" %}
+
+                {% include "includes/tr_list_inc.html" %}
+
     </div>
 
 
@@ -110,11 +144,56 @@
 
 {% block footer-scripts %}
 <script type="text/javascript" src="{{ STATIC_URL }}js/ocl.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.tinysort.min.js"></script>
 <script type="text/javascript">
 
 jQuery('input[type="button"]').removeClass('hide');
 
+
+$(function() {
+    $('span.view-input input[type="checkbox"]').removeClass('hide').each(function () {
+        var a = $(this).next('a');
+        var str = '<p>' + a.text() + '</p>';
+        a.replaceWith(str);
+    });
+});
+
+
+$('span.view-input input[type="checkbox"]').click( function() {
+    var checkbox = $(this)
+    if (checkbox.is(':checked')){
+        $('div.content div.content-list').addClass('hide');
+        checkbox.parents('div.content-list').removeClass('half hide').addClass('full').fadeIn(400);
+    }
+    else {
+        checkbox.parents('div.content-list').removeClass('full').addClass('half');
+        $('div.content div.content-list').removeClass('hide').fadeIn(400);
+    }
+});
+
 jQuery('.content * form').addClass('hide absolute');
+
+$('select.list-sort').change(function(){
+    var list = $(this).next('ul.ocl');
+    var items = list.children('li');
+    var opt = $(this).find('option:selected').val();
+    switch (opt) {
+    case 'def':
+        break;
+    case 'Newest':
+        items.tsort('span.created',{order:'desc'});
+        break;
+    case 'Oldest':
+        items.tsort('span.created',{order:'asc'});
+        break;
+    case 'AZ':
+        items.tsort('h5',{order:'asc'});
+        break;
+    case 'ZA':
+        items.tsort('h5',{order:'desc'});
+        break;
+    }
+});
 
 jQuery('#update-trigger').click(function() {
     if (jQuery('#update-form').hasClass('hide')) {
@@ -150,7 +229,7 @@ function addUpdate(e) {
         dataType: 'json',
         success: function(data, responseStatus, jqXHR){
             var r = data;
-            $("div.update-list ul.ocl").prepend(r.html);
+            $("ul.update-list").prepend(r.html);
             $('#update-form')[0].reset();
             $('input#update-trigger').attr("value", 'Add Update');
             $('#update-form').addClass('hide');
@@ -173,7 +252,7 @@ function addTR(e) {
         dataType: 'json',
         success: function(data, responseStatus, jqXHR){
             var r = data;
-            $("div.tr-list ul.ocl").prepend(r.html);
+            $("ul.tr-list").prepend(r.html);
             $('#tr-form')[0].reset();
             $('input#tr-trigger').attr("value", 'Add Update');
             $('#tr-form').addClass('hide');

@@ -1,12 +1,16 @@
 /* #617064 slate, #DCDCDC lgray, #F25251 red, #97C99E aqua, #E8D065 gold, #07041C dblue */
 
-@slate: #617064;
+@reg-slate: #617064;
 @light-gray: #DCDCDC;
 @red: #F25251;
-@aqua: #97C99E;
-@gold: #E8D065;
+@reg-aqua: #97C99E;
+@reg-gold: #E8D065;
 @dark-blue: #07041C;
 
+
+@gold: darken(@reg-gold, 20%);
+@aqua: darken(saturate(@reg-aqua, 40%), 30%);
+@slate: saturate(darken(@reg-slate, 20%), 20%);
 @gray: darken(@light-gray, 20%);
 @ldark-blue: lighten(@dark-blue, 30%);
 @des-slate: desaturate(@slate, 70%);
@@ -52,16 +56,41 @@
 
 .absolute {
     position:absolute;
+} 
+
+.view-input { @base: @aqua;
+    color: @base;
+    border-color: @slate;
+    .border-radius(3px);
+    .box-shadow(0, 0, 10px, .4);
+    margin: 2px 5px;
+    p{display:inline;}
 }
 
 .content-list {
   ul {list-style-type: none;
       padding-left: .5em;
-      margin: 0em .5em .5em 0em;}
+      margin: 0em .5em .5em 0em;
+      
+}
   h5 {color: @dark-blue;
       margin-bottom: .2em;
       display: inline;
-      font-weight: bold;}
+      font-weight: bold;
+      
+}
+  h3 {display:inline;
+}
+  b {color: @red;
+    span{display: none;
+         position: absolute;
+    }
+  }
+  b:hover{
+      span{display: inline;
+
+    }
+}
   a > h5:hover {color: @aqua;}
   a {color: @dark-blue;}
   a:hover {color: @aqua;}
@@ -192,6 +221,8 @@ a.tru:visited {
     }
     h3:hover {color: @gold;
     }
+    select {margin-bottom: 3px;
+    }
 }
 
 .sectionhead {
@@ -211,7 +242,7 @@ a.tru:visited {
 }
 
 
-.half-left{float: left;
+.half{
              width: 50%;
       form {
         background-color: @gray;
@@ -226,9 +257,10 @@ a.tru:visited {
        textarea { width: 100%; margin: 0; padding: 0; border-width: 0; }
     }
 }
-             
-.half-right{float: right;
-          .half-left;
+
+.full {
+    .half;
+    width:100%;
 }
              
 .content {
@@ -238,6 +270,7 @@ a.tru:visited {
   h2 { color: @slate;}
   h3 { color: @aqua;}
   li {.border-radius(10px);}
+  select {width:100px;}
 
 }
 
@@ -247,5 +280,8 @@ a.tru:visited {
 
 .sidebar {
   li {overflow: hidden;}
+}
+
+.footer { width:100%;
 }
 

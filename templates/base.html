@@ -106,7 +106,9 @@
 
     <div class="side-head">
 
-        <a href="{% url personalresource_list request.user %}"><h3>Your Resources</h3></a><select></select>
+        <a href="{% url personalresource_list request.user %}"><h3>Your Resources</h3></a>
+
+        {% resource_options request.user.username %}
  
     </div>
 

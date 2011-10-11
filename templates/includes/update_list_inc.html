@@ -1,17 +1,22 @@
 {% load markup %}
 
-<div class="content-list update-list">
 
-<ul class="ocl">
+
+<ul class="ocl update-list">
     {% for u in update_list %}
     
         <li>
              <h5>{{ u.title }}</h5>
+
+            {% if u.eureka %}
+                <b>!!!<span> Eureka! Now you are getting it!</span></b>
+            {% endif %}
+
              <div class="oc">
 
              {{ u.comment|markdown }}
                 
-                <p>Added {{ u.added|date:"d/m/y f a" }}
+                <p>Added <span class="created">{{ u.added|date:"d/m/y f a" }}</span>
              
                     {% if request.user == topic.person.user %}
 | <a href="{% url topic_update_delete topic.person.user topic.slug u.id %}">Delete</a>
@@ -30,4 +35,4 @@
     {% endfor %}
 </ul>
 
-</div>
+

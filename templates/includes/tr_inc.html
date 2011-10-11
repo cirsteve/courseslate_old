@@ -3,18 +3,24 @@
 
 
 
-        <li>
+       <li>
         
             <h5>{{ r.title }}</h5>
-            <p><a class="tru" href={{ r.resource.url }}>{{ r.resource.url|sliceit:70 }}</a></p>
-            <span class="oc"><p>Added {{ r.added }}{% if r.rtype %} |<a href={% url resource_type_detail r.rtype.slug %}>{{ r.rtype }}</a>{% endif %}
-             
-| <a href="/topics/user/{{ r.topic.person.user }}/{{ r.topic.slug }}/topic-resource/delete/{{ r.id }}/">Delete</a>
- <a href="/topics/user/{{ r.topic.person.user }}/{{ r.topic.slug }}/topic-resource/edit/{{ r.id }}/">Edit</a>
-         
-            {{ r.note|markdown }}</span>
-        </li>
 
+            {% if r.eureka %}
+                <b>!!!<span>Eureka! It's all coming together</span></b>
+            {% endif %}
+
+            <p><a class="tru" href={{ r.resource.url }}>{{ r.resource.url|sliceit:70 }}</a></p>
+            <div class="oc">
+            {{ r.note|markdown }}
+            <p>Added {{ r.added }}{% if r.rtype %} |<a href={% url resource_type_detail r.rtype.slug %}>{{ r.rtype }}</a>{% endif %}
+             {% if request.user == topic.person.user %}
+| <a href="{% url topic_resource_delete topic.person.user topic.slug r.id %}">Delete</a>
+ <a href="{% url topic_resource_edit topic.person.user topic.slug r.id %}">Edit</a>
+             {% endif %}</p>
+</div>
+        </li>
 
 
 

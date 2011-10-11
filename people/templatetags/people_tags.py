@@ -1,4 +1,5 @@
 from django import template
+from django.contrib.auth.models import User
 
 from mystudy.models import Topic
 from aresource.models import PersonalResource
@@ -28,6 +29,26 @@ def all_resources():
     t = PersonalResource.objects.all().order_by('-added')[:4]
     return {"pr_list": t}
     
+
+@register.inclusion_tag('includes/resource_options_inc.html')
+def resource_options(user):
+    user = User.objects.get(username=user)
+    options = []
+    pr = PersonalResource.objects.filter(person__user__username=user)
+    for r in pr:
+        for t in r.tags:
+            if t.name in options:
+                pass
+            else:
+                option = 'Tag-%s' % t.name
+                options.append(option)
+                
+    topics = Topic.objects.filter(person__user__username=user)
+    for t in topics:
+        option = 'Course-%s' % t.title
+        options.append(option)
+    return {'resource_opt':options}
+
 
 @register.filter
 def sliceit(string, length):

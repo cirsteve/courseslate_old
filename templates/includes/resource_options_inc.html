@@ -1,0 +1,9 @@
+        <select>
+
+            {% for o in resource_opt %}
+                <option value="{{ o }}">{{ o }}</option>
+            {% empty %}
+                No Resources
+            {% endfor %}
+
+        </select>
