@@ -6,7 +6,7 @@ function getResourceSet(opt){
         }
     else {
         value = value.toLowerCase().replace(" | ","/").replace(/\s/g, '-');
-        var turl = "http://localhost:8000/resources/get-json/resource-set/" + value + "/";
+        var turl = site_url + "resources/get-json/resource-set/" + value + "/";
         $.ajax({
         url: turl,
         type: "GET",

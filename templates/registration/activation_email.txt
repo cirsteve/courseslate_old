@@ -3,6 +3,6 @@ If the link is not clickable please cut and paste into your browsers address bar
 
 http://courseslate.com/accounts/activate/{{ activation_key }}
 
-Thanks for signing up.
+Thanks for signing up,
 
-Steve
+The CourseSlate Team

@@ -18,7 +18,7 @@ $('a[id]').bind('click', function(e){
     e.preventDefault();
     var user = $(this).parent('li').find('p').find('a').text();
     var view = '/?view=' + $(this).attr('id');
-    window.location = 'http://localhost:8000/people/' + user + view;
+    window.location = site_url + 'people/' + user + view;
 });
 
 </script>

@@ -7,9 +7,6 @@
  <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/cs-icon.png">
         
   <script src="{{ STATIC_URL }}js/less.js" type="text/javascript"></script>
-  <!--[if lt IE 8]>
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/blueprint/ie.css" type="text/css" media="screen, projection">
-  <![endif]-->
   
  <title>{% block title-tag %}CourseSlate{% endblock %}</title>
 
@@ -175,7 +172,8 @@
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
   <script type="text/javascript" src="{{ STATIC_URL }}js/ocl.js"></script>
   <script type="text/javascript" src="{{ STATIC_URL }}js/res-fetch.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.tinysort.min.js"></script> 
+  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.tinysort.min.js"></script>
+  <script type="text/javascript">site_url = 'http://localhost:8000/'</script>  
     {% block footer-scripts %} {% endblock %}
 
   </div>

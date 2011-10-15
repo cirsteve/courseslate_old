@@ -2,17 +2,17 @@
 
 {% block content %}
 <div id="content">
-    <h2>Sign In Below With Your Username or Email</h2>
+    <h2>Sign In Below With Your Username</h2>
     <p>If you have forgotton your password <a href="/accounts/password/reset/">click here to reset it by email</a></p>
 
 
 
 	{% if form.errors %}
-		<p class="error">Sorry, that is not a valid password or username</p>
+		<p class="error">Sorry, that is not a valid password username combination</p>
 	{% endif %}
 
 	<form action="" method="post">{% csrf_token %}
-		<label for="username">Email or User name:</label>
+		<label for="username">User name:</label>
 		<input type="text" name="username" value"" id="username">
 		<label for="password">Password:</label>
 		<input type="password" name="password" value="" id="password">
