@@ -1,5 +1,6 @@
-        <select>
-
+  
+        <select id="res-fetch">
+                <option value="select-resource" default>Select Resource Set</option>
             {% for o in resource_opt %}
                 <option value="{{ o }}">{{ o }}</option>
             {% empty %}

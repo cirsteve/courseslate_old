@@ -4,13 +4,14 @@
 
  <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css">
  <link rel="stylesheet/less" type="text/css" href="{{ STATIC_URL }}css/style.less">
+ <link rel="icon" type="image/png" href="{{ STATIC_URL }}images/cs-icon.png">
+        
   <script src="{{ STATIC_URL }}js/less.js" type="text/javascript"></script>
   <!--[if lt IE 8]>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/blueprint/ie.css" type="text/css" media="screen, projection">
   <![endif]-->
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-    <title>{% block title-tag %}CourseSlate{% endblock %}</title>
+  
+ <title>{% block title-tag %}CourseSlate{% endblock %}</title>
 
 <!-- start Mixpanel --><script type="text/javascript">var mpq=[];mpq.push(["init","708d33e3e3c6d576a328c08169bdce05"]);(function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+"//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push([f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links","track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<d.length;c++){mpq[d[c]]=e(d[c])}})();
 </script><!-- end Mixpanel -->
@@ -81,7 +82,7 @@
   <div class="main-nav">
     <ul>
       <li><a href="/resources/">Resources</a></li>
-      <li><a href="/topics/">Study Topics</a></li>
+      <li><a href="/topics/">Courses</a></li>
       <li><a href="/people/">People</a></li>
     </ul>
   </div>
@@ -96,7 +97,7 @@
 
     <div class="side-head">
 
-        <a href="{% url user_topic_list request.user %}"><h3>Recently Viewed Topics</h3></a>
+        <a href="{% url user_topic_list request.user %}"><h3>Recently Viewed Courses</h3></a>
 
     </div>
 
@@ -112,11 +113,11 @@
  
     </div>
 
-            <div class="content-list">
+       
 
                 {% person_resources request.user.username %}
 
-            </div>
+     
     
 
         {% else %}
@@ -137,12 +138,11 @@
         <a href="{% url resource_list %}"><h3>Recent Resources</h3></a>
  
     </div>
-            <div class="content-list">
+
 
                 {% all_resources %}
 
-            </div>
-    
+
 
 
         {% endif %}
@@ -152,7 +152,7 @@
   </div>
 
   <div class="sectionhead">
-	  
+  
         {% block sectionhead %}{% endblock %}
 
   </div>
@@ -165,11 +165,17 @@
 
 
     
-  <div class="footer">
+  <div class="footer span16">
     {% block footer %}
     <hr>
     {% endblock %}
   </div>
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/ocl.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/res-fetch.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.tinysort.min.js"></script> 
     {% block footer-scripts %} {% endblock %}
 
   </div>

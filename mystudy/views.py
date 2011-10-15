@@ -142,6 +142,30 @@ def tr_create_xhr(request, person, slug):
         else:
             return HttpResponseRedirect("../..")
     return Http404
+                
+        
+def update_create_xhr(request, person, slug):
+    if request.method == "POST":
+        form = UpdatesForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+        else:
+            return Http404
+        try:
+            t = Topic.objects.get(person__user=request.user, slug__iexact=slug)
+        except Topic.DoesNotExist:
+            return Http404
+        form.topic = t
+        form.save()
+        if request.is_ajax():
+            html = render_to_string('includes/update_inc.html',{"u":form,"topic":t})
+            res = {"html":html}
+            response = simplejson.dumps(res)
+            return HttpResponse(response, mimetype='application/json')
+        else:
+            return HttpResponseRedirect('../..')
+    return Http404
+    
 
 class TopicResourcesDetailView(DetailView):
     context_object_name = 'topic_resource'
@@ -246,29 +270,6 @@ class UpdatesCreateView(CreateView):
         self.object.topic = topic
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
-        
-        
-def update_create_xhr(request, person, slug):
-    if request.method == "POST":
-        form = UpdatesForm(request.POST)
-        if form.is_valid():
-            form = form.save(commit=False)
-        else:
-            return Http404
-        try:
-            t = Topic.objects.get(person__user=request.user, slug__iexact=slug)
-        except Topic.DoesNotExist:
-            return Http404
-        form.topic = t
-        form.save()
-        if request.is_ajax():
-            html = render_to_string('includes/update_inc.html',{"u":form,"topic":t})
-            res = {"html":html}
-            response = simplejson.dumps(res)
-            return HttpResponse(response, mimetype='application/json')
-        else:
-            return HttpResponseRedirect('../..')
-    return Http404
         
         
 class UpdateEditView(UpdateView):

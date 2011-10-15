@@ -8,13 +8,13 @@
 <div class="wrap">
     <div class="side-head">
 	
-        <a href="{% url topic_tags_list %}"><h3>Topics Tags</h3></a>
+        <a href="{% url topic_tags_list %}"><h3>Course Tags</h3></a>
 
     </div>
 </div>
 
 	{% tag_cloud_for_model mystudy.Topic as tagc %}
-    <ul class="tag-list tags">
+    <ul class="tag-list">
 	{% for tag in tagc %}
 		<li><a href="{% url topic_tags_detail tag.name %}">{{ tag.name }}</a></li>
 	{% endfor %}
@@ -24,10 +24,10 @@
 
 {% block sectionhead %}
 
-	<h2>Study Topics</h2>
+	<h2>Courses</h2>
 
 	<ul>
-		<li><a href="/topics/">Topics</a></li>
+		<li><a href="/topics/">Courses</a></li>
 		<li><a href="/topics/category/">Categories</a></li>
         <li><a href="/topics/tags-cs/">Tags</a></li>
 	</ul>

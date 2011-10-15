@@ -10,24 +10,77 @@
     <p>About {{ person.user }}: {{ person.bio }}</p>
     <p>Website: <a href="{{ person.website }}">{{ person.website }}</a></p>
 
-<center><a id="corebookmarklet" style="margin:40px;" href="javascript:(function(){window.open('http://localhost:8000/people/user-resources/add?url='+encodeURI(window.location.href),'height=200,width=150')}())">CS+</a></center> 
-    
-    <div class="content-list">
-    
-        <h3>Personal Resources</h3>
+    {% if request.user == person.user %}
 
-         {% include "includes/pr_list_inc.html" %}
+    <div class="bookmarklet">
+        <h4>CourseSlate Bookmarklet:</h4>
+        <p>(Drag the button below onto your browser's toolbar)</p>
 
+    <a id="csbookmarklet"
+           href="javascript:(function(){window.open('http://localhost:8000/people/user-resources/add?url='+encodeURI(window.location.href),'height=200,width=150')}())">
+           CS+url</a>
     </div>
 
-    <hr />
+    {% endif %}
 
-    <div class="content-list">
 
-        <h3>Study Topics</h3>
+    <div class="content-list user-page half pull-left ocl">
+
+        <h3>Courses - {{ person.topic_set.count }}</h3><br />
+
+            <span class="view-input">
+                <input type="checkbox" id="courses" class="hide" value="courses" />
+                <a href={% url user_topic_list person.user.username %}>Courses Only</a>
+            </span>
+            <input class="hide expand-trigger" type="button" value="Expand All" />
+            <select class="list-sort">
+                <option value="def" default>Order By...</option>
+                <option value="Newest" >Newest</option>
+                <option value="Oldest">Oldest</option>
+                <option value="AZ">A to Z</option>
+                <option value="ZA">Z to A</option>
+            </select>
 
         {% include "includes/topic_list_inc.html" %}
 
     </div>
+
+    <div class="content-list user-page half pull-right">
+    
+        <h3>Resources - {{ person.personalresource_set.count }}</h3><br />
+
+            <span class="view-input">
+                <input type="checkbox" id="resources" class="hide" value="resources" />
+                <a href={% url personalresource_list person.user.username %}>Resources Only</a>
+            </span>
+            <input class="hide expand-trigger" type="button" value="Expand All" />
+            <select class="list-sort">
+                <option value="def" default>Order By...</option>
+                <option value="Newest" >Newest</option>
+                <option value="Oldest">Oldest</option>
+                <option value="AZ">A to Z</option>
+                <option value="ZA">Z to A</option>
+            </select>
+
+         {% include "includes/pr_list_inc.html" %}
+
+    </div>
    
+{% endblock %}
+
+{% block footer-scripts %}
+<script type="text/javascript">
+
+$(document).ready(function (){
+    var urlQ = window.location.search;
+    urlQ = urlQ.replace('?', '');
+    var split = urlQ.split('=');
+    if ( urlQ !== '' ) {
+        var view = '"' + split[1] + '"'
+        var b = $('input:checkbox[id=' + view + ']').attr('checked',true);
+        applyFull(b);
+    }
+});
+</script>
+
 {% endblock %}

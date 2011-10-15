@@ -9,12 +9,14 @@
 
 
 @gold: darken(@reg-gold, 20%);
+@dark-gold: fadein(darken(@gold, 30%),20%);
 @aqua: darken(saturate(@reg-aqua, 40%), 30%);
-@slate: saturate(darken(@reg-slate, 20%), 20%);
+@slate: saturate(darken(@reg-slate, 10%), 10%);
 @gray: darken(@light-gray, 20%);
 @ldark-blue: lighten(@dark-blue, 30%);
 @des-slate: desaturate(@slate, 70%);
-@fade-aqua: fadeout(@aqua, 70%);
+@des-light-gray: desaturate(@light-gray, 50%);
+@fade-aqua: fadeout(@aqua, 80%);
 @fade-slate: fadeout(@slate, 30%);
 .box-shadow (@x, @y, @blur, @alpha) {
   @value: @x @y @blur rgba(0, 0, 0, @alpha);
@@ -58,6 +60,35 @@
     position:absolute;
 } 
 
+.bookmarklet { @base: @slate;
+    color: @base;
+    background-color: @fade-aqua;
+    border:1px solid @des-slate;
+    .border-radius(3px);
+    .box-shadow(0, 0, 3px, .4);
+    padding: 5px 5px;
+    width: 220px;
+    text-align: center;
+    h4 {line-height: 10px;}
+}
+
+#csbookmarklet { @base: @dark-blue;
+    color: @base;
+    background-color: #ffffff;
+    border:3px solid @slate;
+    .border-radius(3px);
+    .box-shadow(0, 0, 8px, .4);
+    padding: 2px 5px;
+}
+
+.tdp {
+    div.course_id {display:none;}
+}
+
+.user-page {
+    span.pinfo {display:none;}
+}
+
 .view-input { @base: @aqua;
     color: @base;
     border-color: @slate;
@@ -96,29 +127,31 @@
   a:hover {color: @aqua;}
 }
 
-.ocl {
-  li:nth-child(odd) {border: 2px dashed #EEEEEE;}
-  li:nth-child(even) {border: 2px dashed #ffffff;}
-  li:hover {border: 2px dashed #97C99E;}
-    
-} 
 
-.tag-list {
-    ul {
+ul.tag-list {
     list-style-type: none;
     padding: .5em;
-    margin: .0em .5em .5em 0em;
-}
+    width: auto;
+    margin: 1em .5em .5em 1em;
+    
 
    li {
     margin: .2em .3em .1em .2em;
-    display: inline;
+    display: inline-block;
+    line-height: 1.8em;
+    width: auto;
+    @base: @dark-gold;
+    border: 2px solid @base;
+    border-radius:(5px);
+
    }
    
    a {
     color: #617064;
     background-color: #E8D065;
+    padding: .2em .3em;
     font-size: 1.2em;
+    border-radius:(5px);
 }
    a:hover {
     color: #E8D065;
@@ -210,25 +243,48 @@ a.tru:visited {
                 height: 50%;
                 margin-bottom: 10px;
     }
-    li span.ns {display:none;}
+
+      li {overflow: hidden;
+      border-top: 2px solid black;
+      margin: auto 0;
+      width: 95%;
+      line-height: 100%;
+      @base: @slate;
+      .border-radius(3px);
+      .border-radius(3px, right);
+      .border-radius(3px, bottom);
+      }
+      li:nth-child(odd) {border: 2px dashed #EEEEEE;}
+      li:nth-child(even) {border: 2px dashed @light-gray;}
+      li:hover {border: 2px dashed @slate;}
+      a.tru {white-space:nowrap;
+             overflow: hidden;
+      }
+    li div.oc {display:none;}
     h3 { color: @aqua;
-             text-align: center;
-             font-size: 1.2em;
-             height: 30px;
-             clear: both;
-             position: relative;
-             line-height: 30px;
+         text-align: center;
+         font-size: 1.2em;
+         height: 30px;
+         clear: both;
+         position: relative;
+         line-height: 30px;
     }
-    h3:hover {color: @gold;
+    h3:hover {color: @gold;}
+    ul {margin:0 4px 4px 14px;
+       .list-alt;}
+    h5>a{color:@dark-blue}
+    h5:hover{
+        a{color:@slate;}
     }
-    select {margin-bottom: 3px;
-    }
+    
+    select {margin: 3px 3px;}
+    .topic-list .oc{display:none;}
 }
 
 .sectionhead {
   font-size: 1.4em;
   background-color: @slate;
-  margin-left: 240px;
+  margin-left: 250px;
   padding-left: 5px;
   h2 {display: inline;
       color: @aqua;
@@ -266,20 +322,26 @@ a.tru:visited {
 .content {
   h1 { color: @dark-blue;
       padding-top: 10px;
-}
+  }
   h2 { color: @slate;}
   h3 { color: @aqua;}
+  h5 {
+      a {color:inherit;}
+  }
   li {.border-radius(10px);}
   select {width:100px;}
+
+  .ocl {
+    li:nth-child(odd) {border: 2px dashed #EEEEEE;}
+    li:nth-child(even) {border: 2px dashed #ffffff;}
+    li:hover {border: 2px dashed #97C99E;}
+    }
+
 
 }
 
 .content-list {
     .list-alt;
-}
-
-.sidebar {
-  li {overflow: hidden;}
 }
 
 .footer { width:100%;

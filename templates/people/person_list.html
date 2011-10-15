@@ -9,3 +9,19 @@
 
     </div>
 {% endblock %}
+
+
+{% block footer-scripts %}
+<script type="text/javascript">
+
+$('a[id]').bind('click', function(e){
+    e.preventDefault();
+    var user = $(this).parent('li').find('p').find('a').text();
+    var view = '/?view=' + $(this).attr('id');
+    window.location = 'http://localhost:8000/people/' + user + view;
+});
+
+</script>
+
+
+{% endblock %}

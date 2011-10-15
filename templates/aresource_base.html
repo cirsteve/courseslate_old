@@ -23,7 +23,7 @@
     {% tag_cloud_for_model aresource.PersonalResource as tagc %}
     <ul class="tags tag-list">
     {% for tag in tagc %}
-        <a href="{% url resource_tags_detail tag.name %}">{{ tag.name }}</a>
+        <li><a href="{% url resource_tags_detail tag.name %}">{{ tag.name }}</a></li>
     {% endfor %}
     </ul>
 

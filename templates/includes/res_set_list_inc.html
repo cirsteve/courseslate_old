@@ -8,7 +8,7 @@
   
         <li>
         
-        <h5><a href="{% url personalresource_detail u.person u.id %}">
+        <h5><a href={% url personalresource_detail u.person u.id %}>
 {% if 0 == u.title|length %}
 {{ u.person }} Resource</a></h5>
 {% else %}

@@ -3,6 +3,7 @@
 {% load markup %}
 
 {% block content %}
+    <h5>Course For <a href={{ topic.person.get_absolute_url }}>{{ topic.person }}</a></h5>
 
 	<h2>{{ topic.title }}</h2>
     
@@ -45,13 +46,13 @@
 
     <hr />
 
-    <div class="content-list pull-left half">
+    <div class="content-list pull-left half tdp">
 
-            <h3>Updates - {{ update_list.count }}</h3>
+            <h3>Notes - {{ update_list.count }}</h3>
 
             {% if request.user == topic.person.user %}
             
-            <input class="hide" type="button" id="update-trigger" value="Add Update" />
+            <input class="hide" type="button" id="update-trigger" value="Add Note" />
 
             <form class="absolute" id="update-form" action="{% url topic_update_create topic.person.user topic.slug %}" method="POST">{% csrf_token %}
                 <div id="update-wrapper">
@@ -75,7 +76,7 @@
             
             <span class="view-input">
                 <input type="checkbox" class="hide" value="Updates Only" />
-                <a href={% url topic_updates topic.person.user topic.slug %}>Updates Only</a>
+                <a href={% url topic_updates topic.person.user topic.slug %}>Notes Only</a>
             </span>
             <input class="hide expand-trigger" type="button" value="Expand All" />
             <select class="list-sort">
@@ -94,10 +95,10 @@
 
 
 
-    <div class="content-list pull-right half">
+    <div class="content-list pull-right half tdp">
 
 
-        <h3>Topic Resources - {{ tr_list.count }}</h3>
+        <h3>Resources - {{ tr_list.count }}</h3>
 
             {% if request.user == topic.person.user %}
 
@@ -143,67 +144,22 @@
 {% endblock %}
 
 {% block footer-scripts %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/ocl.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}js/jquery.tinysort.min.js"></script>
+
 <script type="text/javascript">
 
-jQuery('input[type="button"]').removeClass('hide');
 
-
-$(function() {
-    $('span.view-input input[type="checkbox"]').removeClass('hide').each(function () {
-        var a = $(this).next('a');
-        var str = '<p>' + a.text() + '</p>';
-        a.replaceWith(str);
-    });
-});
-
-
-$('span.view-input input[type="checkbox"]').click( function() {
-    var checkbox = $(this)
-    if (checkbox.is(':checked')){
-        $('div.content div.content-list').addClass('hide');
-        checkbox.parents('div.content-list').removeClass('half hide').addClass('full').fadeIn(400);
-    }
-    else {
-        checkbox.parents('div.content-list').removeClass('full').addClass('half');
-        $('div.content div.content-list').removeClass('hide').fadeIn(400);
-    }
-});
 
 jQuery('.content * form').addClass('hide absolute');
-
-$('select.list-sort').change(function(){
-    var list = $(this).next('ul.ocl');
-    var items = list.children('li');
-    var opt = $(this).find('option:selected').val();
-    switch (opt) {
-    case 'def':
-        break;
-    case 'Newest':
-        items.tsort('span.created',{order:'desc'});
-        break;
-    case 'Oldest':
-        items.tsort('span.created',{order:'asc'});
-        break;
-    case 'AZ':
-        items.tsort('h5',{order:'asc'});
-        break;
-    case 'ZA':
-        items.tsort('h5',{order:'desc'});
-        break;
-    }
-});
 
 jQuery('#update-trigger').click(function() {
     if (jQuery('#update-form').hasClass('hide')) {
         jQuery('#update-form').removeClass('hide');
-        jQuery('input#update-trigger').attr("value", 'Cancel Update');
+        jQuery('input#update-trigger').attr("value", 'Cancel Note');
     }
     else {
         jQuery('#update-form').addClass('hide');
         jQuery('#update-form')[0].reset();
-        jQuery('input#update-trigger').attr("value", 'Add Update');
+        jQuery('input#update-trigger').attr("value", 'Add Note');
     }
 });
 

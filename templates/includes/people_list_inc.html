@@ -4,7 +4,7 @@
             {% for t in person_list %}
                 <li>
                 <p><a href={{ t.get_absolute_url }}>{{ t.user }}</a>- Member Since {{ t.user.date_joined }}</p>
-                <a href='{% url personalresource_list t.user %}'>User Resources</a> | <a href='{% url user_topic_list t.user %}'>User Topics</a>
+                <a id="courses" href='{% url user_topic_list t.user %}'>{{ t.user }}'s Courses - {{ t.topic_set.count }}</a> | <a id="resources" href='{% url personalresource_list t.user %}'>{{ t.user }}'s Resources - {{ t.personalresource_set.count }}</a>
                 </li>
             {% endfor %}
  </ul>

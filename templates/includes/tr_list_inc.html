@@ -6,7 +6,7 @@
     {% for r in tr_list %}
     
         <li>
-        
+            <div class="course_id"><a href= {{ r.topic.get_absolute_url }}>Course: {{ r.topic }}</a></div>
             <h5>{{ r.title }}</h5>
 
             {% if r.eureka %}
@@ -16,7 +16,7 @@
             {% endif %}
 
             <p>
-                <a class="tru" href={{ r.resource.url }}>{{ r.resource.url|sliceit:70 }}</a>
+                <a class="tru" href={{ r.resource.url }}>{{ r.resource.url|sliceit:65 }}</a>
             </p>
             <div class="oc">
             
@@ -26,8 +26,8 @@
 
                 {% if request.user == topic.person.user %}
 
-                | <a href="{% url topic_resource_delete topic.person.user topic.slug r.id %}">Delete</a>
-                <a href="{% url topic_resource_edit topic.person.user topic.slug r.id %}">Edit</a>
+                | <a href="{% url topic_resource_delete r.topic.person.user r.topic.slug r.id %}">Delete</a>
+                <a href="{% url topic_resource_edit r.topic.person.user r.topic.slug r.id %}">Edit</a>
 
                 {% endif %}</p>
 

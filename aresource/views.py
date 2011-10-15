@@ -1,7 +1,9 @@
 # Create your views here.
 from django.shortcuts import render_to_response, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
+from django.utils import simplejson
+from django.template.loader import render_to_string, get_template
 from aresource.models import Resource, ResourceType, PersonalResource
 from aresource.forms import ResourceForm, PersonalResourceForm
 from mystudy.models import TopicResource, Topic
@@ -9,10 +11,36 @@ from people.models import Person
 
 from tagging.models import Tag, TaggedItem
 
+
+def resource_set_json(request, restype, resset):
+    result = {"result":False}
+    user = request.user.username
+    if restype == 'recent':
+        templ = 'includes/pr_list_inc.html'
+        resources = PersonalResource.objects.filter(person__user__username=user)[:resset]
+        string = render_to_string(templ, {"pr_list":resources})
+    elif restype == 'tag':
+        templ = 'includes/pr_list_inc.html'
+        ti = TaggedItem.objects.get_by_model(PersonalResource, resset)
+        resources = ti.filter(person__user__username=user)
+        string = render_to_string(templ, {"pr_list":resources})
+    elif restype == 'course':
+        templ = 'includes/tr_list_inc.html'
+        c = Topic.objects.get(person__user__username=user, slug__iexact=resset)
+        resources = c.topicresource_set.all()
+        string = render_to_string(templ, {"tr_list":resources})
+    else:
+        return HttpResponse('<b>No dice</b>')
+    if len(resources) > 0:
+        result['result'] = True
+    result['html'] = string
+    return HttpResponse(simplejson.dumps(result), mimetype="application/json")
+
+
 class ResourceListView(ListView):
-	context_object_name = 'resource_list'
-	model = Resource
-	template_name = 'aresource/resource_list.html'
+    context_object_name = 'resource_list'
+    model = Resource
+    template_name = 'aresource/resource_list.html'
 
 
 class ResourceDetailView(DetailView):
