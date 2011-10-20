@@ -22,12 +22,13 @@
             
                 {{ r.note|markdown }}
 
-                <p>Added <span class="created">{{ r.added }}</span>{% if r.rtype %} |<a href={% url resource_type_detail r.rtype.slug %}>{{ r.rtype }}</a>{% endif %}
+                <p>Added <span class="created">{{ r.added|date:"d/m/y" }}</span>{% if r.rtype %} |<a href={% url resource_type_detail r.rtype.slug %}>{{ r.rtype }}</a>{% endif %}
+                    | Video: {{ resource.video|yesno:"Y,N" }}
 
                 {% if request.user == topic.person.user %}
 
                 | <a href="{% url topic_resource_delete r.topic.person.user r.topic.slug r.id %}">Delete</a>
-                <a href="{% url topic_resource_edit r.topic.person.user r.topic.slug r.id %}">Edit</a>
+                <a class="ajax-edit" href="{% url topic_resource_edit r.topic.person.user r.topic.slug r.id %}">Edit</a>
 
                 {% endif %}</p>
 

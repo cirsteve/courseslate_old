@@ -144,12 +144,31 @@
 {% endblock %}
 
 {% block footer-scripts %}
-
+{{ block.super }}
+<script type="text/javascript" src="{{ STATIC_URL }}js/object-edit.js"></script>
 <script type="text/javascript">
 
 
+$('div.sidebar ul.pr-list li').live('mouseover',function(){
+    $(this).find('input.addtotopic').removeClass('hide');
+    });
 
-jQuery('.content * form').addClass('hide absolute');
+
+$('div.sidebar ul.pr-list li').live('mouseout',function(){
+    $(this).find('input.addtotopic').addClass('hide');
+    });
+
+$('input.addtotopic').live('click', function(){
+    var url = $(this).parent().parent().find('a.tru');
+    url = url.attr('href');
+    var form = $('form#tr-form');
+    form.find('input#id_resource').val(url);
+    form.removeClass('hide');
+    $('input#tr-trigger').attr("value", 'Cancel Resource');
+});
+
+
+$('.content * form').addClass('hide absolute');
 
 jQuery('#update-trigger').click(function() {
     if (jQuery('#update-form').hasClass('hide')) {

@@ -19,6 +19,7 @@
     <a id="csbookmarklet"
            href="javascript:(function(){window.open('http://localhost:8000/people/user-resources/add?url='+encodeURI(window.location.href),'height=200,width=150')}())">
            CS+url</a>
+
     </div>
 
     {% endif %}
@@ -69,6 +70,7 @@
 {% endblock %}
 
 {% block footer-scripts %}
+{{ block.super }}
 <script type="text/javascript">
 
 $(document).ready(function (){

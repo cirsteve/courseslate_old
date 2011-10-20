@@ -15,20 +15,18 @@ from tagging.models import Tag, TaggedItem
 def resource_set_json(request, restype, resset):
     result = {"result":False}
     user = request.user.username
+    templ = 'includes/resource_options_list_inc.html'
     if restype == 'recent':
-        templ = 'includes/pr_list_inc.html'
         resources = PersonalResource.objects.filter(person__user__username=user)[:resset]
-        string = render_to_string(templ, {"pr_list":resources})
+        string = render_to_string(templ, {"resources":resources})
     elif restype == 'tag':
-        templ = 'includes/pr_list_inc.html'
         ti = TaggedItem.objects.get_by_model(PersonalResource, resset)
         resources = ti.filter(person__user__username=user)
-        string = render_to_string(templ, {"pr_list":resources})
+        string = render_to_string(templ, {"resources":resources,"tag":resset})
     elif restype == 'course':
-        templ = 'includes/tr_list_inc.html'
         c = Topic.objects.get(person__user__username=user, slug__iexact=resset)
         resources = c.topicresource_set.all()
-        string = render_to_string(templ, {"tr_list":resources})
+        string = render_to_string(templ, {"resources":resources})
     else:
         return HttpResponse('<b>No dice</b>')
     if len(resources) > 0:
@@ -122,6 +120,19 @@ class PersonalResourceCreateView(CreateView):
         initial.update({'resource': str(res)})
         return initial
         
+def PersonalResourceCreateViewOC(request):
+    url = request.GET.get('url','')
+    person = request.user.get_profile()
+    try:
+        r = Resource.objects.get(url=url)
+    except Resource.DoesNotExist:
+            r = Resource.objects.create(url=url)
+            r.save()
+    p = PersonalResource(resource=r, person=person)
+    p.save()
+    return HttpResponse('OK')
+    
+        
 
 class PersonalResourceEditView(UpdateView):
     context_object_name = 'resource'
@@ -180,3 +191,6 @@ class ResourceTagListView(ListView):
     context_object_name = 'tag_list'
     model = Tag
     template_name = 'aresource/resource_tag_list.html'
+    
+    def get_queryset(self):
+        return Tag.objects.usage_for_model(PersonalResource, counts=True)

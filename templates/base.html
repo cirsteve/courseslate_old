@@ -51,7 +51,7 @@
 
     
     {% if request.user.is_authenticated %}
-            <a href="/people/{{ request.user }}/">{{ request.user }}</a>, <a href="/people/edit-profile/">Edit Your Profile</a>, <a href="/accounts/logout/">Logout</a>
+            <a id="current-user" href="/people/{{ request.user }}/">{{ request.user }}</a>, <a href="/people/edit-profile/">Edit Your Profile</a>, <a href="/accounts/logout/">Logout</a>
 
     {% else %}
 
@@ -78,9 +78,10 @@
    
   <div class="main-nav">
     <ul>
-      <li><a href="/resources/">Resources</a></li>
-      <li><a href="/topics/">Courses</a></li>
-      <li><a href="/people/">People</a></li>
+      <li><a id="courselink" href="/topics/">Courses</a></li>
+      <li><a id="resourcelink" href="/resources/">Resources</a></li>
+      <li><a id="taglink" href="/tags/">Tags</a></li>
+      <li><a id="peoplelink" href="/people/">People</a></li>
     </ul>
   </div>
 
@@ -119,7 +120,7 @@
 
         {% else %}
 
-           <a href="/accounts/register/"><h3>Sign Up as a for an Account</h3></a>
+           <a href="/accounts/register/"><h3>Sign Up for an Account</h3></a>
 
 
     

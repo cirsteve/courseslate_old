@@ -26,4 +26,10 @@ class TopicResourceForm(ModelForm):
     resource = URLField(label='Resource URL')
     class Meta:
         model = TopicResource
-        fields = ('title','eureka', 'rtype', 'note')
+        fields = ('title','eureka', 'video', 'rtype', 'note')
+        
+    def __init__(self, *args, **kwargs):
+        super(TopicResourceForm, self).__init__(*args, **kwargs)
+        if self.instance.pk:
+            t = TopicResource.objects.get(id=self.instance.pk)
+            self.fields['resource'].initial = t.resource.url

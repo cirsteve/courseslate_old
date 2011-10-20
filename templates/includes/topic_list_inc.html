@@ -11,7 +11,7 @@
 
                     <div class="oc">
                         {{ t.description|markdown }}
-<p>Added <span class="created">{{ t.created|date:"d/m/y-f a" }}</span> in <a href={{ t.category.get_absolute_url }}>{{ t.category }}</a>
+<p>Added <span class="created">{{ t.created|date:"d/m/y" }}</span> in <a href={{ t.category.get_absolute_url }}>{{ t.category }}</a>
 <span class="pinfo"> by <a href="{{ t.person.get_absolute_url }}">{{ t.person }}</a></span></p>
                 </div>
                 </li>

@@ -20,7 +20,7 @@
              
                     {% if request.user == topic.person.user %}
 | <a href="{% url topic_update_delete topic.person.user topic.slug u.id %}">Delete</a>
- <a href="{% url topic_update_edit topic.person.user topic.slug u.id %}">Edit</a>
+ <a class="ajax-edit" href="{% url topic_update_edit topic.person.user topic.slug u.id %}">Edit</a>
              {% endif %}</p>
 
              

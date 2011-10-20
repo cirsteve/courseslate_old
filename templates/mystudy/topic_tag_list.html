@@ -1,13 +1,19 @@
 {% extends "mystudy_base.html" %}
 
 {% block content %}
-	<h2>Topic Tags</h2>
+<div class="span14">
+	<h2>Course Tags</h2>
 
-    <div class="tag-list">
-		<ul class="tags">
+		<ul class="tag-list">
 			{% for t in tag_list %}
-				<li><a href='{% url topic_tags_detail t.name %}'>{{ t.name }} </a>  in {{ t.count }} topic{{ t.count|pluralize }}</li>
+				<span class="half-col"><li><a href='{% url topic_tags_detail t.name %}'>{{ t.name }} </a></li> X {{ t.count }}</span>
 			{% endfor %}
 		</ul>
-    </div>
+</div>
+
+{% endblock %}
+
+{% block footer-scripts %}
+{{ block.super }}
+
 {% endblock %}

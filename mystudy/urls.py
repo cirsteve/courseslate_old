@@ -2,15 +2,18 @@ from django.conf.urls.defaults import *
 from django.contrib.auth.decorators import login_required
 
 from mystudy.views import UserTopicListView, TopicListView, TopicDetailView, TopicCreateView, TopicEditView
-from mystudy.views import TopicResourcesCreateView, TopicResourcesListView, TopicResourceEditView, TopicResourceDeleteView, tr_create_xhr
-from mystudy.views import UpdatesListView, UpdatesCreateView, UpdateEditView, UpdateDeleteView, update_create_xhr
+from mystudy.views import TopicResourcesCreateView, TopicResourcesListView, TopicResourceEditView, TopicResourceDeleteView
+from mystudy.views import UpdatesListView, UpdatesCreateView, UpdateEditView, UpdateDeleteView
 from mystudy.views import CategoryCreateView, CategoryDetailView, CategoryListView
 from mystudy.views import TopicTagsListView, TopicTagsDetailView
+from mystudy.views import update_create_xhr, update_edit_xhr, tr_create_xhr, tr_edit_xhr
 from mystudy.models import Topic, Update, TopicResource
 
 from people.decorators import owner_required
 
 urlpatterns = patterns('',
+    url(r'get-json/updates/edit/(?P<nid>\d+)/$', update_edit_xhr, name='update_edit_xhr'),
+    url(r'get-json/topic-resource/edit/(?P<nid>\d+)/$', tr_edit_xhr, name='tr_edit_xhr'),
     url(r'category/$', CategoryListView.as_view(), name='topic_category_list'),
     url(r'category/(?P<slug>[-\w]+)/$', CategoryDetailView.as_view(), name='topic_category_detail'),
     url(r'create/$', login_required(TopicCreateView.as_view()), name='topic_create'),

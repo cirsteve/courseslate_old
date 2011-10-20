@@ -1,0 +1,35 @@
+{% extends "cstags_base.html" %}
+{% load tagging_tags %}
+
+{% block content %}
+
+    <h2>{{ tag.name }}</h2>
+
+
+    <h4>Topics</h4>
+    <ul>
+    {% for t in topic_list %}
+        <li>
+            {{ t.name }}
+        </li>
+    {% endfor %}
+    </ul>
+
+
+    <h4>Resources</h4>
+    <ul>
+    {% for r in resource_list %}
+        <li>
+            {{ r.name }}
+        </li>
+    {% endfor %}
+    </ul>
+
+
+{% endblock %}
+
+
+{% block footer-scripts %}
+{{ block.super }}
+
+{% endblock %}

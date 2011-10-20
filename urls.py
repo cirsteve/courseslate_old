@@ -5,6 +5,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^tags/', include('cstags.urls')),
     url(r'^resources/', include('aresource.urls')),
     url(r'^topics/', include('mystudy.urls')),
     url(r'^people/', include('people.urls')),

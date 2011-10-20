@@ -28,6 +28,7 @@ class Resource(models.Model):
     added = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     url = models.URLField(unique=True)
+    video = models.BooleanField()
     rtype = models.ForeignKey(ResourceType, verbose_name="Resource Type", blank=True, null=True)
     
     def __unicode__(self):
@@ -44,6 +45,7 @@ class PersonalResource(models.Model):
     note = models.TextField(blank=True)
     resource = models.ForeignKey('aresource.Resource')
     person = models.ForeignKey('people.Person')
+    video = models.BooleanField()
     rtype = models.ForeignKey('aresource.ResourceType',verbose_name="Resource Type", blank=True, null=True)
     tag = TagField()
     

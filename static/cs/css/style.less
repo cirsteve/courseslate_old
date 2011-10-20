@@ -13,7 +13,8 @@
 @aqua: darken(saturate(@reg-aqua, 40%), 30%);
 @slate: saturate(darken(@reg-slate, 10%), 10%);
 @gray: darken(@light-gray, 20%);
-@ldark-blue: lighten(@dark-blue, 30%);
+@ldark-blue: desaturate(lighten(@dark-blue, 10%), 20%);
+@lldark-blue: lighten(@dark-blue, 60%);
 @des-slate: desaturate(@slate, 70%);
 @des-light-gray: desaturate(@light-gray, 50%);
 @fade-aqua: fadeout(@aqua, 80%);
@@ -81,6 +82,12 @@
     padding: 2px 5px;
 }
 
+a {color:@ldark-blue;}
+
+.current_nav{
+    border-top:4px solid @slate; 
+}
+
 .tdp {
     div.course_id {display:none;}
 }
@@ -128,7 +135,7 @@
 }
 
 
-ul.tag-list {
+.tag-list {
     list-style-type: none;
     padding: .5em;
     width: auto;
@@ -140,34 +147,54 @@ ul.tag-list {
     display: inline-block;
     line-height: 1.8em;
     width: auto;
-    @base: @dark-gold;
-    border: 2px solid @base;
-    border-radius:(5px);
-
+    .border-radius(5px);
    }
-   
+  
    a {
+    .border-radius(5px);
+    line-height: 1.6em;
     color: #617064;
     background-color: #E8D065;
     padding: .2em .3em;
     font-size: 1.2em;
-    border-radius:(5px);
-}
+    @base: @dark-gold;
+    border: 2px solid @base;
+   }
    a:hover {
     color: #E8D065;
     background-color: #617064;
-}   
-    
+    @base: @gold;
+    border: 2px solid @base;
+   }
+   h6 {
+   color: @dark-gold;
+   display: inline;
+   }
+   span.half-col{width:250px;
+               display: inline-block;
+}
+}
+
+
+.cstag-list {
+   .tag-list;
+    li{
+        display:block;
+    }
 }
 
 a.tru {
-    color: #F25251;
-    font-size: .9em;
+    color: @ldark-blue;
+    font-size: 1em;
     font-weight: bold;
 }
 
 a.tru:visited {
     color: #617064;
+}
+
+a.tru:hover {
+    color: @lldark-blue;
 }
 
 .header {
@@ -272,13 +299,19 @@ a.tru:visited {
     h3:hover {color: @gold;}
     ul {margin:0 4px 4px 14px;
        .list-alt;}
+    p{line-height:1em;}
+    h5{line-height:1.6em;}
     h5>a{color:@dark-blue}
     h5:hover{
         a{color:@slate;}
     }
-    
     select {margin: 3px 3px;}
     .topic-list .oc{display:none;}
+    .tag-list li{
+        width:auto;
+        @base: @dark-gold;
+        border: 1px solid @base;
+    }
 }
 
 .sectionhead {
@@ -299,7 +332,7 @@ a.tru:visited {
 
 
 .half{
-             width: 50%;
+      width: 50%;
       form {
         background-color: @gray;
         width: 335px;

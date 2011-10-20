@@ -1,0 +1,25 @@
+{% extends "cstags_base.html" %}
+{% load tagging_tags %}
+
+{% block content %}
+
+    <h2>Tag List</h2>
+
+    <ul class="cstag-list">
+    {% for t in tag_list %}
+        <li>
+            <a href="{{ t.name }}">{{ t.name }}</a>
+            {{ t.topic_set.count }}
+        </li>
+    {% endfor %}
+    </ul>
+
+
+{% endblock %}
+
+
+
+{% block footer-scripts %}
+{{ block.super }}
+
+{% endblock %}

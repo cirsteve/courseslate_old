@@ -3,12 +3,15 @@
 
 {% block content %}
 <h2>{{ tag.name }}</h2>
-{% for t in tag_list %}
-<ul>
-	<li><a href='{{ t.get_absolute_url }}'>{{ t.title }}</a></li>
-</ul>
-{% endfor %}
 
 
+
+    {% include "includes/topic_list_inc.html" %}
+
+
+{% endblock %}
+
+{% block footer-scripts %}
+{{ block.super }}
 
 {% endblock %}

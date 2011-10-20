@@ -1,12 +1,17 @@
 {% extends "mystudy_base.html" %}
 
 {% block content %}
-	<h1>Study Topics</h1>
+	<h1>Courses</h1>
 
     <div class="content-list">
 		
     {% include "includes/topic_list_inc.html" %}
 
     </div>
+
+{% endblock %}
+
+{% block footer-scripts %}
+{{ block.super }}
 
 {% endblock %}

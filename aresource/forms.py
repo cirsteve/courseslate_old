@@ -6,7 +6,7 @@ class PersonalResourceForm(ModelForm):
     resource = URLField(label='Resource URL', widget=TextInput(attrs={'size':'70'}))
     class Meta:
         model = PersonalResource
-        fields = ('title', 'note', 'rtype', 'tag')
+        fields = ('title', 'note', 'video', 'rtype', 'tag')
         
         
 class ResourceForm(ModelForm):

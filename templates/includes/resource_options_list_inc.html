@@ -1,0 +1,59 @@
+{% load markup %}
+{% load people_tags %}
+
+
+<ul class="ocl pr-list">
+    {% for r in resources %}
+    
+        <li>
+
+            {% if tag %}
+
+                {{ tag }}
+
+                    <h5><a href="{% url personalresource_detail r.person r.id %}">
+{% if 0 == r.title|length %}
+{{ r.person }} Resource</a></h5>
+{% else %}
+{{ r.title }}</a></h5>
+{% endif %}
+
+            {% else %}
+            
+            <div class="course_id"><a href={{ r.topic.get_absolute_url }}>Course: {{ r.topic }}</a></div>
+            <span class="hide">{{ r.topic.slug }}</span>
+            
+                    <h5>
+{% if 0 == r.title|length %}
+ Note</h5>
+{% else %}
+{{ r.title }}</h5>
+{% endif %}
+
+            {% endif %}
+
+
+            <p>
+                <a class="tru" href={{ r.resource.url }}>{{ r.resource.url|sliceit:65 }}</a>
+            </p>
+            <div class="oc">
+            
+                {{ r.note|markdown }}
+
+            </div>
+
+<p><span class="created">{{ r.added|date:"d/m/y" }}</span>{% if r.rtype %} | <a href="{% url resource_type_detail r.rtype.slug %}">{{ r.rtype }}</a>{% endif %}
+        |Video:{{ resource.video|yesno:"Y,N" }}
+<input class="hide addtotopic" type="button" value="Add" /></p>
+        </li>
+
+    {% empty %}
+
+        <p>No resources yet</p>
+
+    {% endfor %}
+</ul>
+
+
+
+

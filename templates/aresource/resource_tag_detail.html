@@ -3,13 +3,45 @@
 {% block content %}
 <h1>Resources for {{ tag }}</h1>
 
- 
-<h3>Topic Resource</h3>
+     <div class="content-list pull-left half">
+       <h3>Topic Resource</h3><br />
+            <span class="view-input">
+                <input type="checkbox" class="hide" value="Tr Only" />Topic Resources Only
+            </span>
+            <input class="hide expand-trigger" type="button" value="Expand All" />
+            <select class="list-sort">
+                <option value="def" default>Order By...</option>
+                <option value="Newest" >Newest</option>
+                <option value="Oldest">Oldest</option>
+                <option value="AZ">A to Z</option>
+                <option value="ZA">Z to A</option>
+            </select>
   
     {% include "includes/tr_list_inc.html" %}
+    </div>
 
-<h3>Personal Resource</h3>    
+     <div class="content-list pull-right half">
+
+         <h3>Personal Resource</h3><br />
+            <span class="view-input">
+                <input type="checkbox" class="hide" value="Pr Only" />Personal Resources Only
+            </span>
+            <input class="hide expand-trigger" type="button" value="Expand All" />
+            <select class="list-sort">
+                <option value="def" default>Order By...</option>
+                <option value="Newest" >Newest</option>
+                <option value="Oldest">Oldest</option>
+                <option value="AZ">A to Z</option>
+                <option value="ZA">Z to A</option>
+            </select>    
     
     {% include "includes/pr_list_inc.html" %}
+    </div>
+
+{% endblock %}
+
+
+{% block footer-scripts %}
+{{ block.super }}
 
 {% endblock %}

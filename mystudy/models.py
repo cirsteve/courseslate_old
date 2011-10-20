@@ -87,6 +87,7 @@ class TopicResource(models.Model):
     title = models.CharField(max_length=140, blank=True)
     note = models.TextField(blank=True)
     resource = models.ForeignKey(Resource)
+    video = models.BooleanField()
     rtype = models.ForeignKey('aresource.ResourceType', verbose_name="Resource Type", blank=True, null=True)
     topic = models.ForeignKey('mystudy.Topic')
     eureka = models.BooleanField()

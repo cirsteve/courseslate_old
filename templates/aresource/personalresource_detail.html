@@ -11,10 +11,10 @@
 </div>
 Filed Under 
 <a href="{{ resource.rtype.get_absolute_url }}/">{{ resource.rtype }}</a> on {{ resource.added }}
-
+            | Video: {{ resource.video|yesno:"Yes,No" }}
         {% if request.user == resource.person.user %}
 
-            <a href="{% url personalresource_edit resource.id %}">Edit</a>
+            | <a href="{% url personalresource_edit resource.id %}">Edit</a>
 
         {% endif %}
 
@@ -28,15 +28,21 @@ Filed Under
 
     {% tags_for_object resource as tags %}
 
-        <ul class="tags">
-    Tags:
+        <ul class="tag-list">
+    <h6>Tags:</h6>
         {% for tag in tags %}
-        
-            <a href={% url topic_tags_detail tag.name %}>{{ tag.name }}</a>
-
+            <li>
+                <a href={% url topic_tags_detail tag.name %}>{{ tag.name }}</a>
+            </li>
         {% endfor %}
         </ul>
 
     </div>
 </div>
+{% endblock %}
+
+
+{% block footer-scripts %}
+{{ block.super }}
+
 {% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load tagging_tags %}
+
+
+
+{% block sidebar %}
+
+<div class="wrap">
+    <div class="side-head">
+	
+        <a href="{% url topic_tags_list %}"><h3>Course Tags</h3></a>
+
+    </div>
+</div>
+
+	{% tag_cloud_for_model mystudy.Topic as tagc %}
+    <ul class="tag-list">
+	{% for tag in tagc %}
+		<li><a href="{% url topic_tags_detail tag.name %}">{{ tag.name }}</a></li>
+	{% endfor %}
+    </ul>
+
+{% endblock %}
+
+{% block sectionhead %}
+
+	<h2>Tags</h2>
+
+	<ul>
+		<li><a href="/tags/">All Tags</a></li>
+	</ul>
+
+{% endblock %}
+
+{% block footer-scripts %}
+<script type="text/javascript">
+$('a#taglink').addClass('current_nav');
+</script>
+{% endblock %}

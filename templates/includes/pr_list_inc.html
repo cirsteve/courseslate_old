@@ -19,7 +19,7 @@
 
             {{ u.note|markdown }}
 
-            <p>Added <span class="created">{{ u.added }}</span><span class="pinfo"> by {{ u.person }}</span></p>
+            <p>Added <span class="created">{{ u.added|date:"d/m/y" }}</span>| Video: {{ resource.video|yesno:"Y,N" }}<span class="pinfo"> by {{ u.person }}</span></p>
 
         
 

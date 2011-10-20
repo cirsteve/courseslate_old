@@ -16,9 +16,9 @@
                 
                 <p>Added {{ u.added|date:"d/m/y f a" }}
              
-                    {% if request.user == topic.person.user %}
-| <a href="{% url topic_update_delete topic.person.user topic.slug u.id %}">Delete</a>
- <a href="{% url topic_update_edit topic.person.user topic.slug u.id %}">Edit</a>
+                    {% if request.user == u.topic.person.user %}
+| <a href="{% url topic_update_delete u.topic.person.user.username u.topic.slug u.id %}">Delete</a>
+ <a href="{% url topic_update_edit u.topic.person.user.username u.topic.slug u.id %}">Edit</a>
              {% endif %}</p>
 
              

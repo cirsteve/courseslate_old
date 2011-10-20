@@ -7,23 +7,55 @@
 
 Filed Under
 <a href="{{ resource.rtype.get_absolute_url }}/">{{ resource.rtype }}</a> | Initially added {{ resource.added }}
+        | Video: {{ resource.video|yesno:"Yes,No" }}
 
-    <h4>Referenced in {{ tr_list.count }} topics</h4>
+<br />
+<br />
 
-    <div class="content-list">
-    
+    <div class="content-list pull-left half">
+        <h4>Referenced in {{ tr_list.count }} topics</h4>
+                <span class="view-input">
+                    <input type="checkbox" class="hide" value="topics" />Topics Only
+               </span>
+            <input class="hide expand-trigger" type="button" value="Expand All" />
+            <select class="list-sort">
+                <option value="def" default>Order By...</option>
+                <option value="Newest" >Newest</option>
+                <option value="Oldest">Oldest</option>
+                <option value="AZ">A to Z</option>
+                <option value="ZA">Z to A</option>
+            </select>
         {% include "includes/tr_list_inc.html" %}
 
     </div>
 
-    <hr />
 
-    <h4>Referenced in {{ pr_list.count }} profiles</h4>
 
-    <div class="content-list">
+
+    
+
+    <div class="content-list pull-right half">
+        <h4>Referenced in {{ pr_list.count }} profiles</h4>
+                <span class="view-input">
+                    <input type="checkbox" class="hide" value="profiles" />Profiles Only
+                </span>
+            <input class="hide expand-trigger" type="button" value="Expand All" />
+            <select class="list-sort">
+                <option value="def" default>Order By...</option>
+                <option value="Newest" >Newest</option>
+                <option value="Oldest">Oldest</option>
+                <option value="AZ">A to Z</option>
+                <option value="ZA">Z to A</option>
+            </select>
 
         {% include "includes/pr_list_inc.html" %}
 
     </div>
+
+{% endblock %}
+
+
+{% block footer-scripts %}
+{{ block.super }}
 
 {% endblock %}

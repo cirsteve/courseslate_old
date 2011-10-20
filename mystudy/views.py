@@ -7,7 +7,8 @@ from django.utils.decorators import method_decorator
 from django.utils import simplejson
 from django.core import serializers
 from django.template.loader import render_to_string, get_template
-from django.template import Context, Template
+from django.template import Context, Template, RequestContext
+from django.core.context_processors import csrf
 
 
 from mystudy.models import Topic, Category, Update, TopicResource
@@ -65,7 +66,7 @@ class TopicDetailView(DetailView):
         context['update_form'] = UpdatesForm()
         context['tr_form'] = TopicResourceForm()
         context['update_list'] = Update.objects.filter(topic=self.object).order_by('-added')
-        context['tr_list'] = TopicResource.objects.filter(topic=self.object).order_by('-added')
+        context['tr_list'] = TopicResource.objects.select_related().filter(topic=self.object).order_by('-added')
         return context
     
 class TopicCreateView(CreateView):
@@ -142,6 +143,37 @@ def tr_create_xhr(request, person, slug):
         else:
             return HttpResponseRedirect("../..")
     return Http404
+    
+    
+def tr_edit_xhr(request, nid):
+    if request.is_ajax():
+        if request.method == "GET":
+            tr = TopicResource.objects.get(id=nid)
+            t = tr.resource.url
+            data = {"resource":t}
+            form = TopicResourceForm(instance=tr)
+#            form.resource=str(tr.resource.url)
+#            form.save(commit=False)
+            c = {"form":form}
+            c.update(csrf(request))
+            formt = 'includes/gen_form_inc.html'
+            html = render_to_string(formt, c)
+            res = {"html":html}
+            response = simplejson.dumps(res)
+            return HttpResponse(response, mimetype='application/json')
+        if request.method == "POST":
+            tr = TopicResource.objects.get(id=nid)
+            form = TopicResourceForm(request.POST, instance=tr)
+            if form.is_valid():
+                form = form.save()
+                template = 'includes/tr_inc.html'
+                html = render_to_string(template, {"r":form})
+                res = {"html":html}
+                response = simplejson.dumps(res)
+                return HttpResponse(response, mimetype='application/json')
+            else:
+                return Http404
+    return Http404
                 
         
 def update_create_xhr(request, person, slug):
@@ -164,6 +196,33 @@ def update_create_xhr(request, person, slug):
             return HttpResponse(response, mimetype='application/json')
         else:
             return HttpResponseRedirect('../..')
+    return Http404
+    
+    
+def update_edit_xhr(request, nid):
+    if request.is_ajax():
+        if request.method == "GET":
+            note = Update.objects.get(id=nid)
+            form = UpdatesForm(instance=note)
+            c = {"form":form}
+            c.update(csrf(request))
+            formt = 'includes/gen_form_inc.html'
+            html = render_to_string(formt, c)
+            res = {"html":html}
+            response = simplejson.dumps(res)
+            return HttpResponse(response, mimetype='application/json')
+        if request.method == "POST":
+            note = Update.objects.get(id=nid)
+            form = UpdatesForm(request.POST, instance=note)
+            if form.is_valid():
+                form = form.save()
+                template = 'includes/update_inc.html'
+                html = render_to_string(template, {"u":form})
+                res = {"html":html}
+                response = simplejson.dumps(res)
+                return HttpResponse(response, mimetype='application/json')
+            else:
+                return Http404
     return Http404
     
 
@@ -210,7 +269,7 @@ class TopicResourcesListView(ListView):
     
     def get_queryset(self):
         self.topic = get_object_or_404(Topic, slug=self.kwargs['slug'])
-        return TopicResource.objects.filter(topic=self.topic)
+        return TopicResource.objects.selected_related().filter(topic=self.topic)
         
     def get_context_data(self, **kwargs):
         context = super(TopicResourcesListView, self).get_context_data(**kwargs)
@@ -334,7 +393,6 @@ class  CategoryCreateView(CreateView):
 	
 class TopicTagsListView(ListView):
     context_object_name = 'tag_list'
-#    queryset = Tag.objects.get_for_object(Topic)
     template_name = 'mystudy/topic_tag_list.html'
    
     def get_queryset(self):
@@ -353,7 +411,7 @@ class TopicTagsDetailView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super(TopicTagsDetailView, self).get_context_data(**kwargs)
-        context['tag_list'] = TaggedItem.objects.get_by_model(Topic, self.t)
+        context['topic_list'] = TaggedItem.objects.get_by_model(Topic, self.t)
         return context
         
         
