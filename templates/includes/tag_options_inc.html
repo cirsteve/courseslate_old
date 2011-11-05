@@ -1,0 +1,10 @@
+  
+        <select id="tag-fetch">
+                <option value="select-resource" default>Select A Tag</option>
+            {% for o in tags %}
+                <option value="{{ o }}">{{ o }}</option>
+            {% empty %}
+                No Tags
+            {% endfor %}
+
+        </select>

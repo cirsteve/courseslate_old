@@ -15,7 +15,7 @@
 {{ block.super }}
 <script type="text/javascript">
 
-$('a[id]').bind('click', function(e){
+$('.content-list a[id]').bind('click', function(e){
     e.preventDefault();
     var user = $(this).parent('li').find('p').find('a').text();
     var view = '/?view=' + $(this).attr('id');

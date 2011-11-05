@@ -33,6 +33,16 @@ def resource_set_json(request, restype, resset):
         result['result'] = True
     result['html'] = string
     return HttpResponse(simplejson.dumps(result), mimetype="application/json")
+    
+
+def get_tags_json(request):
+    user = request.user
+    ti = TaggedItem.objects.get_by_model(PersonalResource, resset)
+    resources = PersonalResources.objects.filter(person__user__username=user)
+    tags = Tag.objects.objects.usage_for_queryset(resources)
+    template = 'includes/tag_options_inc.html'
+    string = render_to_string(template, {'tags':tags})
+    return HttpResponse(simplejson.dumps(string), mimetype="application/json")
 
 
 class ResourceListView(ListView):
