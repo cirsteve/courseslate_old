@@ -11,6 +11,30 @@ from people.models import Person
 
 from tagging.models import Tag, TaggedItem
 
+def post_personal_resource(request):
+    result = {"result":False}
+    if request.method == 'POST':
+        data = simplejson.loads(request.POST)
+        pr = PersonalResourceForm(data)
+        if pr.is_valid():
+            pr.save(commit=False)
+        else:
+            res = simplejson.dumps(result)
+            return HttpResponse(res, mimetype="application/json")
+        if request.user.is_authenticated():
+            user = request.user
+            pr.user = user
+            pr.save()
+            result["result"] = True
+            res = simplejson.dumps(result)
+            return HttpResponse(res, mimetype="application/json")
+
+    else:
+        res = simplejson.dumps(result)
+        return HttpResponse(res, mimetype="application/json")
+        
+        
+    
 
 def resource_set_json(request, restype, resset):
     result = {"result":False}
