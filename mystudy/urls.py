@@ -10,7 +10,7 @@ from mystudy.views import update_create_xhr, update_edit_xhr, tr_create_xhr, tr_
 from mystudy.models import Topic, Update, TopicResource
 
 from people.decorators import owner_required
-
+#url list
 urlpatterns = patterns('',
     url(r'get-json/updates/edit/(?P<nid>\d+)/$', update_edit_xhr, name='update_edit_xhr'),
     url(r'get-json/topic-resource/edit/(?P<nid>\d+)/$', tr_edit_xhr, name='tr_edit_xhr'),
